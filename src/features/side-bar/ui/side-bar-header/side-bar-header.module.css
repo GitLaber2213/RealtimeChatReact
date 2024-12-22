@@ -1,0 +1,10 @@
+.sideBarHeader {
+    height: 100px;
+    text-align: center;
+    background-color: rgb(29, 41, 31);
+    border-bottom: solid 2px rgb(0, 0, 0);
+}
+
+.sideBarHeader img {
+    border-radius: 50%;
+}

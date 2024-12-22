@@ -1,0 +1,32 @@
+.loginUnContainer {
+    display: flex;
+    margin: 5px
+}
+
+.loginUnContainer input {
+    margin-bottom: 10px;
+}
+
+
+.loginUnContainer input:-webkit-autofill {
+    transition: all 100000000000s ease-in-out; /* Костыль сделал. Заебала эта хуета*/
+}
+
+.loginUnContainer input {
+    width: 100%;
+    background-color: transparent;
+    margin-left: 10px;
+    color: white;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgb(42, 129, 68);
+    transition: .1s;
+}
+
+.loginUnContainer input:focus {
+    border-bottom: 1px solid rgb(80, 255, 133);
+    color: rgb(80, 255, 133);
+    background-color: transparent;
+}
+

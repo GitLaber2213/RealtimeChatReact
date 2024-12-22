@@ -1,0 +1,16 @@
+.searchInput {
+    width: 90%;
+    padding: 10px;
+    background-color: rgb(65, 85, 71);
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    border: none;
+    transition: .2s;
+}
+
+.searchInput:focus {
+    border-bottom: 2px solid rgb(80, 255, 133);
+    color: rgb(80, 255, 133);
+}

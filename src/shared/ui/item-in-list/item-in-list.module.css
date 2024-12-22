@@ -1,0 +1,25 @@
+.container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    text-align: left;
+}
+
+.container div {
+    margin: auto 10px;
+}
+
+.container img {
+    margin: auto 10px;
+}
+
+.textContainer {
+    white-space: nowrap;
+    margin-top: 10px;
+    display: block;
+}
+
+.textContainer div {
+    margin: 5px 0 5px 0;
+}

@@ -1,0 +1,43 @@
+.messageContainer {
+    display: flex;
+    font-size: 14px;
+}
+
+
+.messageUnContainer {
+    position: relative; 
+    background-color: rgb(57, 66, 59);
+    color: white; 
+    margin: 5px 10px; 
+    padding: 10px;
+    border-radius: 50px;
+    display: flex;
+}
+
+.messageUnContainer.active {
+    background-color: rgb(38, 129, 65);
+}
+
+.messageUnContainer::after {
+    content: '';
+    position: absolute; 
+    bottom: 0px; 
+    left: -5px; 
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent; 
+    border-bottom: 10px solid rgb(57, 66, 59);
+    z-index: 0;
+}
+
+.messageUnContainer.active::after {
+    border-bottom: 10px solid rgb(38, 129, 65);
+    z-index: 0;
+}
+
+.timeStamp {
+    font-size: 10px;
+    margin-top: auto;
+    margin-left: 15px;
+}

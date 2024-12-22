@@ -1,0 +1,10 @@
+.menuItem {
+    height: 50px;
+    cursor: pointer;
+    transition: .2s;
+    border-radius: 7px;
+}
+
+.menuItem:hover {
+    background-color: rgb(97, 129, 107);
+}

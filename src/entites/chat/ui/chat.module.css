@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    height: 100%;
+}
+
+.lastMessageContainer {
+    width: 10%;
+    flex: auto;
+}
+
+.lastMessage {
+    text-overflow: ellipsis; 
+    color: rgb(189, 188, 188);
+    font-size: 12px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+}
+
+.timeAndMessageCount {
+    font-size: 12px;
+    color: rgb(177, 187, 176);
+    width: 40px;
+}
+
+.timeAndMessageCount div {
+    margin-top: 10px;
+}

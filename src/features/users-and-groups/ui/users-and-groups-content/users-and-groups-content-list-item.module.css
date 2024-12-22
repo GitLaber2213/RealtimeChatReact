@@ -1,0 +1,12 @@
+.usersAndGroupsContentListItem {
+    height: 60px;
+    cursor: pointer;
+}
+
+.usersAndGroupsContentListItem:hover {
+    background-color: rgb(47, 66, 52);
+}
+
+.usersAndGroupsContentListItem.active {
+    background-color: rgb(67, 167, 87);;
+}

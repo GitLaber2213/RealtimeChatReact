@@ -1,0 +1,36 @@
+.messagesRoomHeader {
+    background-color: rgb(39, 54, 43);
+    display: flex;
+}
+
+.profileInfo {
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+}
+
+.nameUser {
+    margin: auto 0;
+}
+
+.openMenuBtn {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    margin: auto 30px;
+    transition: .2s;
+}
+
+.openMenuBtn:hover {
+    background-color: rgb(65, 85, 71);
+    border-radius: 20px;
+}
+
+.openMenuBtn.active {
+    background-color: rgb(65, 85, 71);
+    border-radius: 20px;
+}

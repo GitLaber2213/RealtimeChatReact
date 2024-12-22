@@ -1,0 +1,11 @@
+.sideBarContentListItem {
+    height: 50px;
+    cursor: pointer;
+    border-radius: 7px;
+    transition: .2s;
+    padding-left: 4px;
+}
+
+.sideBarContentListItem:hover {
+    background-color: rgb(74, 109, 81);
+}

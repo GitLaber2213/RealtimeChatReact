@@ -1,0 +1,10 @@
+.findUsersContainer {
+    width: 100%;
+    height: 50px;
+    display: flex;
+}
+
+.findUsersUnContainer {
+    width: 100%;
+    margin: auto 20px;
+}

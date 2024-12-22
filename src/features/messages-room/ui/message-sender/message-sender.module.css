@@ -1,0 +1,62 @@
+.container {
+    height: 50px;
+    display: flex;
+    background-color: rgb(39, 54, 43);
+    margin-top: auto;
+}
+
+.unContainer {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    margin: auto 10px auto auto;
+}
+
+.unContainer textarea {
+    width: 100%;
+    max-height: 100px;
+    background-color: rgb(39, 54, 43);
+    text-decoration: none;
+    border: none;
+    font-size: 14px;
+    outline: none;
+    color: white;
+    white-space: normal;
+    resize: none;
+}
+
+.senderMessageImg {
+    visibility: hidden;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.senderMessageImg.active {
+    visibility: visible;
+    animation: pulsing .2s 1;
+}
+
+
+@-webkit-keyframes pulsing {
+    0% {
+        -webkit-transform: scale(0.5, 0.5);
+        transform: scale(0.5, 0.5)
+    }
+
+    100% {
+        -webkit-transform: scale(1.0, 1.0);
+        transform: scale(1.0, 1.0);
+    }
+}
+
+@keyframes pulsing {
+    0% {
+        -webkit-transform: scale(0.5, 0.5);
+        transform: scale(0.5, 0.5)
+    }
+
+    50% {
+        -webkit-transform: scale(1.0, 1.0);
+        transform: scale(1.0, 1.0);
+    }
+}

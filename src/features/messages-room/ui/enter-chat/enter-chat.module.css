@@ -1,0 +1,11 @@
+.enterChatContainer {
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.enterChatContainer span {
+    background-color: rgb(74, 99, 81);
+    padding: 10px;
+    border-radius: 50px;
+}
