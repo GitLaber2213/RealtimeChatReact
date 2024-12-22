@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UsersAndGroupsContentListItem from './users-and-groups-content-list-item'
-import { onValue, query, ref } from "firebase/database";
+import { onValue, ref } from "firebase/database";
 import { db } from "../../../../shared/firebase/firebase-config";
 import { Loader, useAuth } from "../../../../shared";
 import { useSelector } from "react-redux";
