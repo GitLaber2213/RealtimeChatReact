@@ -1,34 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import UsersAndGroupsContentListItem from './users-and-groups-content-list-item'
-import { onValue, ref } from "firebase/database";
-import { db } from "../../../../shared/firebase/firebase-config";
-import { Loader, useAuth } from "../../../../shared";
+import { Loader, useAuth, useFetchChats } from "../../../../shared";
 import { useSelector } from "react-redux";
-import { useDebounce } from "use-debounce";
 
 export const UsersAndGroupsContentList = () => {
-    const [loading, setLoading] = useState(true)
-    const [data, setData] = useState([]);
     const { uid } = useAuth()
-
     const searchInputValue = useSelector((state) => state.usersAndGroups.searchInputValue)
-    const debounceSearchValue = useDebounce(searchInputValue, 200)
-
-    useEffect(() => {
-        const refdb = ref(db, 'Chats/')
-        const unSubscribe = onValue(refdb, (snapshot) => {
-            const fetchedData = snapshot.val();
-            if (fetchedData) {
-                setData(Object.values(fetchedData).filter((user) => 
-                    user.uid !== uid &&
-                    ["displayName"].some((key) => user[key]?.toLowerCase().includes(debounceSearchValue[0].toLowerCase()))
-                ))
-            }
-            setLoading(false)
-        })
-
-        return () => unSubscribe()
-    }, [debounceSearchValue[0]])
+    
+    const {data, loading} = useFetchChats(uid, searchInputValue)
 
     if (loading) {
         return <Loader />

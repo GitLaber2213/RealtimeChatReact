@@ -7,7 +7,7 @@ import { SideBarContent } from "../side-bar-content/side-bar-content";
 
 export const SideBar = () => {
     const { activeWindow, openWindow, closeWindow } = useModalWindowState()
-    const { user } = useAuth()
+    const { uid } = useAuth()
 
     return (
         <>
@@ -19,7 +19,7 @@ export const SideBar = () => {
             </div>
 
 
-            <Profile user={user} activeWindow={activeWindow} closeWindowHandler={closeWindow}/>
+            <Profile uid={uid} activeWindow={activeWindow} closeWindowHandler={closeWindow}/>
             <CreateGroup activeWindow={activeWindow} closeWindowHandler={closeWindow}/>
         </>
     )

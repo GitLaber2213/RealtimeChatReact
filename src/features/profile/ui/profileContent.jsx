@@ -3,7 +3,7 @@ import classes from './Profile.module.css'
 import { FormInput, ItemInList, UserIcon } from "../../../shared";
 
 
-export const ProfileContent = ({ img, text, imgHeight, imgWidth, placeholder, handleChangeInput }) => {
+export const ProfileContent = ({ img, text, imgHeight, imgWidth, placeholder, value, handleChangeInput }) => {
     const [edit, setEdit] = useState(false)
 
     return (
@@ -12,7 +12,7 @@ export const ProfileContent = ({ img, text, imgHeight, imgWidth, placeholder, ha
 
                 <div className={text === undefined ? classes.editBtn + ' ' + classes.editBtnActive : classes.editBtn}>edit?</div>
                 
-                {edit ? <FormInput type="text" placeholder={placeholder} img={img} imgHeight={imgHeight} imgWidth={imgWidth} onChange={handleChangeInput}/> :
+                {edit ? <FormInput type="text" placeholder={placeholder} img={img} imgHeight={imgHeight} imgWidth={imgWidth} value={value} onChange={handleChangeInput} /> :
                     <ItemInList image={!img ? UserIcon : img} text={text} imgHeight={imgHeight} imgWidth={imgWidth} />}
             </div>
         </div>

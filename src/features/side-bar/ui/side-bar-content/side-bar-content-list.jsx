@@ -4,16 +4,18 @@ import SideBarContentListItem from "./side-bar-content-list-item";
 import profilePhoto from '../../../../shared/assets/userName.png'
 import groupPhoto from '../../../../shared/assets/group.png'
 import logoutPhoto from '../../../../shared/assets/logout.png'
-import { Constants } from "../../../../shared";
+import { Constants, useAuth } from "../../../../shared";
 import { useNavigate } from "react-router-dom";
 import { RouteConstants } from "../../../../shared/constants/constants";
-import { doSingOut } from "../../../../shared/firebase/auth";
+import { signOut } from "firebase/auth";
 
 export const SideBarContentList = ({ openWindow }) => {
     const navigate = useNavigate()
+    const { auth } = useAuth()
+    
 
     const logoutHandleClick = async () => {
-        await doSingOut()
+        await signOut(auth)
         navigate(RouteConstants.LOGIN, { relative: "path" })
     }
 

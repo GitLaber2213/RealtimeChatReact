@@ -2,7 +2,7 @@ import React from "react";
 import classes from './form-input.module.css'
 
 
-export const FormInput = ({ placeholder, img, imgHeight, imgWidth, value, onChange, type = 'text' }) => {
+export const FormInput = ({ placeholder, img, imgHeight, imgWidth, value, onChange, type = 'text'}) => {
     return (
         <div className={classes.loginUnContainer}>
             <img src={img} height={imgHeight} width={imgWidth} />

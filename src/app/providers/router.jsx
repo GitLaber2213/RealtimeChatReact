@@ -4,8 +4,8 @@ import { RouteConstants } from "../../shared/constants/constants";
 import { useAuth } from "../../shared";
 
 const AuthLoader = () => {
-    const { user } = useAuth();
-    return user ? <Navigate to={RouteConstants.CHATS} replace /> : <Navigate to={RouteConstants.LOGIN} replace />;
+    const { auth } = useAuth();
+    return auth ? <Navigate to={RouteConstants.CHATS} replace /> : <Navigate to={RouteConstants.LOGIN} replace />;
 }
 
 export const router = createBrowserRouter([
