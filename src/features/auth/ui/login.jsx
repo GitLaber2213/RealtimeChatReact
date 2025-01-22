@@ -5,7 +5,6 @@ import { Button, EmailIcon, FormInput, Loader, PasswordIcon, useAuth } from "../
 import { useHandleSignIn } from "../hooks/use-handle-sign-in";
 import { useNavigate } from "react-router-dom";
 
-
 export const Login = () => {
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
@@ -14,7 +13,7 @@ export const Login = () => {
 
   const handleClick = async (event, email, password) => {
     event.preventDefault()
-    handleSignIn(email, password)
+    await handleSignIn(email, password)
   }
 
   if (loading) {

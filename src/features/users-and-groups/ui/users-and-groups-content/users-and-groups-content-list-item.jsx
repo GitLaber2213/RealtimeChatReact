@@ -16,6 +16,7 @@ export const UsersAndGroupsContentListItem = ({ userName, userId, avatar, favori
         dispatch(usersAndGroupsSlice.actions.searchUsers(''))
     }
 
+
     return (
         <div className={userId === id ? classes.usersAndGroupsContentListItem + ' ' + classes.active : classes.usersAndGroupsContentListItem} onClick={() => handleClick(userId)}>
             <Chat avatar={avatar} userName={userName} favorite={favorite} />

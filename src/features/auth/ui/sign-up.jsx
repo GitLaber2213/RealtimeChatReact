@@ -14,9 +14,9 @@ export const SignUp = () => {
     const { handleSignIn, error, loading } = useHandleSignIn("signup")
 
 
-    const handleClick = (event, email, password) => {
+    const handleClick = async (event, email, password) => {
         event.preventDefault()
-        handleSignIn(email, password, displayName)
+        await handleSignIn(email, password, displayName)
     }
 
     if (loading) {
@@ -25,11 +25,14 @@ export const SignUp = () => {
 
     return (
         <Form error={error} title="Sign Up">
+        
             <FormInput type="text" placeholder={'Display name'} img={UserNameIcon} imgHeight={25} imgWidth={25} value={displayName} onChange={setDisplayName} />
             <FormInput type="email" placeholder={'Email'} img={EmailIcon} imgHeight={25} imgWidth={25} value={email} onChange={setEmail} />
             <FormInput type="password" placeholder={'Password'} img={PasswordIcon} imgHeight={25} imgWidth={25} value={pass} onChange={setPass} />
+            
             <Button handleClick={(event) => handleClick(event, email, pass)} text="Sign Up" />
             <AuthSwitch btnText={"Login"} handleNavigate={() => navigate(RouteConstants.LOGIN, { relative: 'path' })} text={"Back to"} />
+        
         </Form>
     )
 }

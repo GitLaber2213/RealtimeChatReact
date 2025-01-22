@@ -1,25 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./Profile.module.css";
-import { Button, ErrorInfo, useAuth } from "../../../shared";
-import { ref, update } from "firebase/database";
-import { db } from "../../../shared/firebase/firebase-config";
+import { Button, ErrorInfo, Loader, useAuth } from "../../../shared";
+import { useUpdateProfile } from "../../../shared/lib/firebase-hooks/use-update-profile";
 
 
 export const OptionalMenu = ({userInfo}) => {
     const { uid } = useAuth()
-    const [error, setError] = useState(undefined)
+    const {error, loading, handleUpdateProfile} = useUpdateProfile()
+    const handleUpdateProfileClick = (userInfo) => {
+        handleUpdateProfile(userInfo, uid)
+    }
 
-    const handleUpdateProfileClick = async (userInfo) => {
-        try {
-
-            await update(ref(db, `Chats/${uid}`), {
-                displayName: userInfo.displayName,
-                email: userInfo.email,
-            })
-            setError(undefined)
-        } catch (error) {
-            setError(error.message);
-        }
+    if(loading) {
+        <Loader />
     }
 
     return (

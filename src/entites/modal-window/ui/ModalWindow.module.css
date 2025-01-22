@@ -47,24 +47,38 @@
 }
 
 .windowHead {
-    margin: auto 0;
+    margin: auto 0; 
 }
 
-.closeWindowBtn {
+.closeWindowBtnContainer {
     height: 35px;
     width: 35px;
-    font-size: 30px;
-    font-weight: lighter;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin: auto 0;
     margin-left: auto;
     transition: .5s;
 }
 
-.closeWindowBtn:hover {
-    border-radius: 30px;
+.closeWindowBtnContainer:hover {
+    border-radius: 50%;
     background-color: rgb(65, 85, 71);
 }
 
-.closeWindowBtn:after {
-    content: "\00d7";
+.closeWindowBtnContainer:hover .closeWindowBtn {
+    background-color: rgb(44, 187, 63);
+}
+
+.closeWindowBtn {
+    height: 50%;
+    width: 50%;
+    margin: auto 0;
+    background-color: rgb(26, 109, 33);
+    clip-path: polygon(5% 0%, 0% 5%, 40% 50%, 0% 95%, 5% 100%, 50% 60%, 95% 100%, 100% 95%, 60% 50%, 100% 5%, 95% 0%, 50% 40%);
+    transition: .5s;
+}
+
+.closeWindowBtn:hover {
+    background-color: rgb(0, 255, 21);
 }

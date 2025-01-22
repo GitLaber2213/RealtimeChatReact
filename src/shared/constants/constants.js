@@ -9,3 +9,12 @@ export const RouteConstants = {
     SIGN_UP: "/Sign-up/",
     CHATS: "/Chats/",
 }
+
+
+export const FirebaseConstants = {
+    FIREBASE_COLLECTION_USERS: "Users",
+    FIREBASE_COLLECTION_GROUPS: "Groups",
+    FIREBASE_COLLECTION_FAVORITES: "Favorites",
+    FIREBASE_COLLECTION_CHATS: "Chats",
+    FIREBASE_COLLECTION_MESSAGES: "Messages"
+}

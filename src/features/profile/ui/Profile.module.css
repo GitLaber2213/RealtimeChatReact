@@ -5,9 +5,9 @@
 
 .profileContent {
     margin-bottom: 15px;
+    cursor: pointer;
     position: relative;
 }
-
 
 .editBtn {
     position: absolute;

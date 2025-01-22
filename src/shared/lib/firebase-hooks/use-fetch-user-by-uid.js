@@ -1,27 +1,25 @@
-import { onValue, ref } from "firebase/database"
-import { db } from "../../firebase/firebase-config"
+import { firestoreDB } from "../../firebase/firebase-config"
 import { useEffect, useState } from "react"
-
-
+import { doc, onSnapshot } from "firebase/firestore"
+import { FirebaseConstants } from "../../constants/constants"
 
 export const useFetchUserByUid = (uid) => {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [data, setData] = useState([]);
 
-
     useEffect(() => {
-            const unSubscribe = onValue(ref(db, `Chats/${uid}`), (snapshot) => {
-                if (snapshot.exists()) {
-                    const data = snapshot.val()
-                    setData(data)
-                }
-                setLoading(false)
-            })
+        if (!uid) return
+        
+        setLoading(true)
+        const unSubscribe = onSnapshot(doc(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_USERS, uid), (doc) => {
+            setData(doc.data())
+        })
 
-            return () => unSubscribe()
-        }, [uid])
+        setLoading(false)
 
+        return () => unSubscribe()
+
+    }, [uid])
 
     return { loading, data }
-
 }

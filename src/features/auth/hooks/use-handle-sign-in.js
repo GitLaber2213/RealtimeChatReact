@@ -1,32 +1,39 @@
-import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { AuthApi } from "../api/auth-api"
-import { RouteConstants } from "../../../shared/constants/constants"
+import { FirebaseConstants, RouteConstants } from "../../../shared/constants/constants"
 import { useAuth } from "../../../shared"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth"
+import { useState } from "react"
+import { doc, setDoc} from "firebase/firestore"
+import { firestoreDB } from "../../../shared/firebase/firebase-config"
 
 export const useHandleSignIn = (authType) => {
-    const [error, setError] = useState(undefined)
-    const [loading, setLoading] = useState(false)
     const { auth } = useAuth()
     const navigate = useNavigate()
+    const [error, setError] = useState(undefined)
+    const [loading, setLoading] = useState(false)
 
     const handleSignIn = async (email, password, displayName) => {
-        setLoading(true)
-        let user
+        setError(undefined)
         try {
+            setLoading(true)
             switch (authType) {
                 case "login":
-                    user = await AuthApi.doSignInWithEmailAndPassword(auth, email, password)
+                    await signInWithEmailAndPassword(auth, email, password)
                     break
                 case "signup":
-                    user = await AuthApi.doCreateUserWithEmailAndPassword(auth, email, password, displayName)
-                    await AuthApi.doUpdateProfile(user, displayName)
-                    await AuthApi.doAddUserInDatabase(user.uid, user.displayName, user.email)
+                    const user = await createUserWithEmailAndPassword(auth, email, password)
+                    await setDoc(doc(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_USERS, user.user.uid), {
+                        displayName: user.user.displayName,
+                        email: user.user.email,
+                        photoURL: user.user.photoURL,
+                        uid: user.user.uid,
+                        favorite: false
+                    })
                     break
             }
-            navigate(RouteConstants.CHATS, { relative: 'path' })
-        } catch (error) {
-            setError(error.message)
+            navigate(RouteConstants.CHATS, { relative: "path" })
+        } catch (signInError) {
+            setError(signInError.message)
         } finally {
             setLoading(false)
         }

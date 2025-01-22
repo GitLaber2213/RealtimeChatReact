@@ -50,7 +50,11 @@ export { useModalWindowState } from './lib/hooks/useWindowState'
 export { useAuth } from './lib/firebase-hooks/use-auth'
 export { useFetchChats } from './lib/firebase-hooks/use-fetch-chats'
 export { useFetchUserByUid } from './lib/firebase-hooks/use-fetch-user-by-uid'
+export { useChangeFavorite } from './lib/firebase-hooks/use-change-favorite'
 
 //CONSTANTS//
 export { Constants } from './constants/constants'
+
+//CONTEXTS//
+export { AuthContext } from './contexts/auth-context'
 

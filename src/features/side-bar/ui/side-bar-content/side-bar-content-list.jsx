@@ -7,16 +7,15 @@ import logoutPhoto from '../../../../shared/assets/logout.png'
 import { Constants, useAuth } from "../../../../shared";
 import { useNavigate } from "react-router-dom";
 import { RouteConstants } from "../../../../shared/constants/constants";
-import { signOut } from "firebase/auth";
 
 export const SideBarContentList = ({ openWindow }) => {
     const navigate = useNavigate()
-    const { auth } = useAuth()
+    const { doSignOut } = useAuth()
+
     
 
-    const logoutHandleClick = async () => {
-        await signOut(auth)
-        navigate(RouteConstants.LOGIN, { relative: "path" })
+    const logoutHandleClick = () => {
+        doSignOut()
     }
 
     return (

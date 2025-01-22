@@ -1,15 +1,10 @@
 .loginUnContainer {
     display: flex;
-    margin: 5px
+    margin: 5px;
 }
-
-.loginUnContainer input {
-    margin-bottom: 10px;
-}
-
 
 .loginUnContainer input:-webkit-autofill {
-    transition: all 100000000000s ease-in-out; /* Костыль сделал. Заебала эта хуета*/
+    transition: all 100000000000s ease-in-out; /* Костыль */
 }
 
 .loginUnContainer input {

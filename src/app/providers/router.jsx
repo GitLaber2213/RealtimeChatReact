@@ -1,11 +1,27 @@
-import { createBrowserRouter, Navigate, Outlet } from "react-router-dom";
+import { createBrowserRouter, Navigate, Outlet, useParams } from "react-router-dom";
 import { LoginPage, SignUpPage, ChatsPage } from "../../pages";
 import { RouteConstants } from "../../shared/constants/constants";
 import { useAuth } from "../../shared";
 
 const AuthLoader = () => {
-    const { auth } = useAuth();
-    return auth ? <Navigate to={RouteConstants.CHATS} replace /> : <Navigate to={RouteConstants.LOGIN} replace />;
+    const { user } = useAuth()
+    const { id } = useParams()
+
+    if (user) {
+        return (
+            <>
+                <ChatsPage />
+                <Navigate to={id ? `${RouteConstants.CHATS}${id}` : RouteConstants.CHATS} replace={true} />
+            </>
+        )
+    } else {
+        return (
+            <>
+                <LoginPage />
+                <Navigate to={RouteConstants.LOGIN} replace={true} />
+            </>
+        )
+    }
 }
 
 export const router = createBrowserRouter([
@@ -27,12 +43,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: RouteConstants.CHATS,
-                element: <ChatsPage />
+                element: <AuthLoader />
             },
             {
-                path: `${RouteConstants.CHATS}:id`,
-                element: <ChatsPage />
+                path: `${RouteConstants.CHATS}:id?`,
+                element: <AuthLoader />
             }
         ]
     }
-]);
+])

@@ -12,7 +12,11 @@ export const ModalWindow = ({ activeWindow, windowType, closeWindowHandler, chil
             <div className={modalContentClass} onClick={e => e.stopPropagation()}>
                 <div className={classes.windowHeadContainer}>
                     <div className={classes.windowHead}>{windowHeader}</div>
-                    <div className={classes.closeWindowBtn} onClick={closeWindowHandler}></div>
+                    <div className={classes.closeWindowBtnContainer} onClick={closeWindowHandler}>
+                        <div className={classes.closeWindowBtn} >
+                            
+                        </div>
+                    </div>
                 </div>
                 {children}
             </div>
