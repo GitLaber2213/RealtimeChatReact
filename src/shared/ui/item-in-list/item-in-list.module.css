@@ -4,6 +4,7 @@
     overflow: hidden;
     display: flex;
     text-align: left;
+    position: relative;
 }
 
 .container div {
@@ -22,4 +23,10 @@
 
 .textContainer div {
     margin: 5px 0 5px 0;
+}
+
+.container .loader {
+    width: 25px;
+    right: 9px;
+    position: relative;
 }

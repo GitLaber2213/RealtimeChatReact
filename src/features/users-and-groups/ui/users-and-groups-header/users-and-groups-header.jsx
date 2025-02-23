@@ -9,7 +9,6 @@ export const UsersAndGroupsHeader = () => {
     const dispatch = useDispatch()
     const searchInputValue = useSelector((state) => state.usersAndGroups.searchInputValue)
     
-    
     const handleChange = (event) => {
         dispatch(usersAndGroupsSlice.actions.searchUsers(event.target.value))
     }

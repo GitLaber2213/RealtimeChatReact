@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import classes from './users-and-groups-list-wrapper.module.css'
 import { ResizableElement, ScrollBar } from "../../../../shared"
 import UsersAndGroupsHeader from "../users-and-groups-header/users-and-groups-header"
-import UsersAndGroupsContent from "../users-and-groups-content/users-and-groups-content"
+import UsersAndGroupsContentList from "../users-and-groups-content/users-and-groups-content-list"
 
 
 
@@ -15,7 +15,7 @@ export const UsersAndGroupsList = () => {
             <ResizableElement setWidth={setWidth} width={width} />
             <ScrollBar shouldScroll={false}>
                 <UsersAndGroupsHeader />
-                <UsersAndGroupsContent />
+                <UsersAndGroupsContentList />
             </ScrollBar>
         </div>
     )

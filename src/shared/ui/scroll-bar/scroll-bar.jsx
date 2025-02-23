@@ -1,20 +1,18 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import classes from './scroll-bar.module.css'
 
 
+const shouldScrollStyle = {
+    height: "100vh",
+    overflowY: "auto",
+    display: "flex",
+    flexDirection: "column-reverse"
+}
+
+
 export const ScrollBar = ({ children, shouldScroll = false }) => {
-    const ref = useRef(null)
-
-    useEffect(() => {
-        const { scrollHeight, clientHeight } = ref.current;
-
-        if (ref.current && shouldScroll && scrollHeight > clientHeight) {
-            ref.current.scrollTop = ref.current.scrollHeight;
-        }
-    }, [children, shouldScroll])
-
     return (
-        <div ref={ref} className={classes.scrollBar}>
+        <div className={classes.scrollBar} style={shouldScroll ? shouldScrollStyle : {}}>
             {children}
         </div>
     )

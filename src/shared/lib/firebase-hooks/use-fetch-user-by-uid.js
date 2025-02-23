@@ -11,6 +11,7 @@ export const useFetchUserByUid = (uid) => {
         if (!uid) return
         
         setLoading(true)
+
         const unSubscribe = onSnapshot(doc(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_USERS, uid), (doc) => {
             setData(doc.data())
         })

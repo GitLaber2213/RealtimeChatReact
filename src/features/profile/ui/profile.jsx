@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import classes from './Profile.module.css';
-import { Constants, EmailIcon, Loader, PhoneIcon, useFetchUserByUid, UserIcon } from '../../../shared';
+import { EmailIcon, Loader, PhoneIcon, useFetchUserByUid, UserIcon } from '../../../shared';
 import ProfileContent from './profileContent';
-import { ModalWindow } from '../../../entites';
 import { OptionalMenu } from './optional-menu';
+import { useParams } from 'react-router-dom';
 
-export const Profile = ({ uid, activeWindow, closeWindowHandler }) => {
-    const { loading, data } = useFetchUserByUid(uid)
+export const Profile = ({ uid = null, setIsActive }) => {
+    const { id } = useParams()
+    const { loading, data } = useFetchUserByUid(uid !== null ? uid : id)
+
     const [userInfo, setUserInfo] = useState({
         displayName: "",
         email: "",
@@ -27,22 +29,17 @@ export const Profile = ({ uid, activeWindow, closeWindowHandler }) => {
         setUserInfo(prev => ({ ...prev, [key]: value }))
     }
 
-    if (loading) {
-        return (
-            <ModalWindow activeWindow={activeWindow} windowType={Constants.PROFILE_WINDOW} closeWindowHandler={closeWindowHandler} windowHeader={"Profile"}>
-                <Loader />
-            </ModalWindow>
-        )
-    }
+    if (loading) return <Loader />
 
     return (
-        <ModalWindow activeWindow={activeWindow} windowType={Constants.PROFILE_WINDOW} closeWindowHandler={closeWindowHandler} windowHeader={"Profile"}>
+        <div>
             <div className={classes.profileHeader}>
                 <ProfileContent
                     img={!data.img && UserIcon}
                     imgHeight={50}
                     imgWidth={50}
                     placeholder={"Display name"}
+                    onEdit={uid !== null}
                     value={userInfo.displayName}
                     handleChangeInput={handleChangeInput("displayName")}
                 />
@@ -54,21 +51,23 @@ export const Profile = ({ uid, activeWindow, closeWindowHandler }) => {
                 imgHeight={25}
                 imgWidth={25}
                 placeholder={"Email"}
+                onEdit={uid !== null}
                 value={userInfo.email}
                 handleChangeInput={handleChangeInput("email")}
             />
             <ProfileContent
-                inputType={"phone"}
+                inputType={"tel"}
                 img={PhoneIcon}
                 imgHeight={25}
                 imgWidth={25}
                 placeholder={"Phone number"}
+                onEdit={uid !== null}
                 value={userInfo.phone}
                 handleChangeInput={handleChangeInput("phone")}
             />
 
-            <OptionalMenu userInfo={userInfo} />
-        </ModalWindow>
+            {uid !== null && <OptionalMenu setIsActive={setIsActive} userInfo={userInfo} />}
+        </div>
     )
 }
 

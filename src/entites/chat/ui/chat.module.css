@@ -10,7 +10,7 @@
 
 .lastMessage {
     text-overflow: ellipsis; 
-    color: rgb(189, 188, 188);
+    color: rgb(255, 255, 255);
     font-size: 12px;
     width: 100%;
     white-space: nowrap;
@@ -25,5 +25,32 @@
 }
 
 .timeAndMessageCount div {
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
 }
+
+.timeStamp {
+    margin-top: 6px;
+}
+
+.notReadedMessagesCount {
+    margin-top: 5px;
+    width: max-content;
+    padding: 3px;
+    color: white;
+    border-radius: 45%;
+    background-color: rgb(67, 167, 87);
+}
+
+.notReadedMessagesCount.active {
+    margin-top: 5px;
+    width: max-content;
+    padding: 3px;
+    border-radius: 45%;
+    background-color: rgb(255, 255, 255);
+    color: rgb(47, 66, 52);
+}
+

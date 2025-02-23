@@ -10,11 +10,13 @@ export const AuthContext = createContext()
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState()
     const [uid, setUid] = useState()
-
+    const [loading, setLoading] = useState(true)
+    const [isAuth, setIsAuth] = useState(false)
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, authUser => {
             if(authUser) {
+                setIsAuth(true)
                 
                 setUid(authUser.uid)
                 setUser(authUser ? {
@@ -26,7 +28,9 @@ export const AuthProvider = ({ children }) => {
                 
             } else {
                 setUser(null)
+                setIsAuth(false)
             }
+            setLoading(false)
         })
         return () => {
             unSubscribe()
@@ -45,7 +49,9 @@ export const AuthProvider = ({ children }) => {
         setUser,
         auth,
         uid,
-        doSignOut
+        doSignOut,
+        isAuth,
+        loading
     }), [user, auth ])
 
     return (

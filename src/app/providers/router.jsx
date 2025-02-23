@@ -1,13 +1,17 @@
 import { createBrowserRouter, Navigate, Outlet, useParams } from "react-router-dom";
 import { LoginPage, SignUpPage, ChatsPage } from "../../pages";
 import { RouteConstants } from "../../shared/constants/constants";
-import { useAuth } from "../../shared";
+import { Loader, useAuth } from "../../shared";
 
 const AuthLoader = () => {
-    const { user } = useAuth()
     const { id } = useParams()
+    const { isAuth, loading } = useAuth()
 
-    if (user) {
+    if(loading) {
+        return <Loader />
+    }
+
+    if (isAuth) {
         return (
             <>
                 <ChatsPage />

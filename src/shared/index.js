@@ -46,11 +46,12 @@ export { Loader } from './ui/loader/loader'
 export { ErrorInfo } from './ui/error-info/error-info'
 
 //LIB//
-export { useModalWindowState } from './lib/hooks/useWindowState'
+export { useObserver } from './lib/hooks/use-observer'
 export { useAuth } from './lib/firebase-hooks/use-auth'
 export { useFetchChats } from './lib/firebase-hooks/use-fetch-chats'
 export { useFetchUserByUid } from './lib/firebase-hooks/use-fetch-user-by-uid'
-export { useChangeFavorite } from './lib/firebase-hooks/use-change-favorite'
+export { useFavorites } from './lib/firebase-hooks/use-favorites'
+export { useMessages } from './lib/firebase-hooks/use-messages'
 
 //CONSTANTS//
 export { Constants } from './constants/constants'

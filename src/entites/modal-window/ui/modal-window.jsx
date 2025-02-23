@@ -1,26 +1,30 @@
 import React from "react";
 import classes from './ModalWindow.module.css'
+import { createPortal } from "react-dom";
 
-export const ModalWindow = ({ activeWindow, windowType, closeWindowHandler, children, windowHeader }) => {
-    const isActive = activeWindow === windowType;
+export const ModalWindow = ({ isActive, setIsActive, children, windowHeader }) => {
 
     const modalContainerClass = isActive ? `${classes.modalWindowContainer} ${classes.active}` : classes.modalWindowContainer;
     const modalContentClass = isActive ? `${classes.modalWindowUnContainer} ${classes.active}` : classes.modalWindowUnContainer;
+    
+    if (!isActive) return null
 
-    return (
-        <div className={modalContainerClass} onClick={closeWindowHandler}>
+    return createPortal(
+        <div className={modalContainerClass} onClick={() => setIsActive(false)}>
             <div className={modalContentClass} onClick={e => e.stopPropagation()}>
                 <div className={classes.windowHeadContainer}>
+
                     <div className={classes.windowHead}>{windowHeader}</div>
-                    <div className={classes.closeWindowBtnContainer} onClick={closeWindowHandler}>
-                        <div className={classes.closeWindowBtn} >
-                            
-                        </div>
+
+                    <div className={classes.closeWindowBtnContainer} onClick={() => setIsActive(false)}>
+                        <div className={classes.closeWindowBtn}></div>
                     </div>
+
                 </div>
                 {children}
             </div>
-        </div>
+        </div>,
+        document.body
     );
 }
 

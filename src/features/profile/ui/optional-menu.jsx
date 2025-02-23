@@ -4,9 +4,10 @@ import { Button, ErrorInfo, Loader, useAuth } from "../../../shared";
 import { useUpdateProfile } from "../../../shared/lib/firebase-hooks/use-update-profile";
 
 
-export const OptionalMenu = ({userInfo}) => {
+export const OptionalMenu = ({userInfo, setIsActive}) => {
     const { uid } = useAuth()
     const {error, loading, handleUpdateProfile} = useUpdateProfile()
+    
     const handleUpdateProfileClick = (userInfo) => {
         handleUpdateProfile(userInfo, uid)
     }
@@ -19,7 +20,7 @@ export const OptionalMenu = ({userInfo}) => {
         <div className={classes.optionalMenu}>
             { error !== undefined && <ErrorInfo errorText={error}/>}
             <Button text={"Save"} handleClick={() => handleUpdateProfileClick(userInfo)}/>
-            <Button text={"Cancel"} />
+            <Button text={"Cancel"}  handleClick={() => setIsActive(false)}/>
         </div>
     );
 };

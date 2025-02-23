@@ -1,12 +1,9 @@
-import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 
 export const usersAndGroupsSlice = createSlice({
     name: 'usersAndGroups',
     initialState: {
-        entites: {},
-        ids: [],
-        selectUserId: undefined,
         searchInputValue: ''
     },
     reducers: {

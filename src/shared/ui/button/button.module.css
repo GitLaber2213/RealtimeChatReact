@@ -2,8 +2,12 @@
     width: 100%;
 }
 
-.optionContainer div {
+.optionContainer button {
     float: right;
+    background-color: transparent;
+    outline: none;
+    color: white;
+    border: none;
     cursor: pointer;
     height: auto;
     margin-right: 20px;
@@ -12,7 +16,7 @@
     padding-bottom: 5px;
 }
 
-.optionContainer div::after {
+.optionContainer button::after {
     content: '';
     position: absolute;
     left: 0;
@@ -23,10 +27,10 @@
     transition: background-color 0.2s;
 }
 
-.optionContainer div:hover {
+.optionContainer button:hover {
     color: rgb(80, 255, 133);
 }
 
-.optionContainer div:hover::after {
+.optionContainer button:hover::after {
     background-color: rgb(80, 255, 133);
 }
