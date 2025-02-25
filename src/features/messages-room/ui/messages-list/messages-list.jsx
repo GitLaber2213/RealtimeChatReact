@@ -1,7 +1,7 @@
-import React from "react";
-import { ScrollBar, useMessages } from "../../../../shared";
-import Message from "./message";
-import { useParams } from "react-router-dom";
+import React from "react"
+import { ScrollBar, useMessages } from "../../../../shared"
+import Message from "./message"
+import { useParams } from "react-router-dom"
 
 
 export const MessagesList = () => {

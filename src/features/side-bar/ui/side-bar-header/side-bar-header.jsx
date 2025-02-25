@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 import classes from './side-bar-header.module.css'
 import userPhoto from '../../../../shared/assets/user.png'
-import { ItemInList, Loader, useAuth, useFetchUserByUid } from "../../../../shared";
+import { ItemInList, Loader, useAuth, useFetchUserByUid } from "../../../../shared"
 
 
 export const SideBarHeader = () => {

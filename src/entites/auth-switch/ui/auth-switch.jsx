@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 import classes from "./auth-switch.module.css"
-import { Button } from "../../../shared";
+import { Button } from "../../../shared"
 
 
 

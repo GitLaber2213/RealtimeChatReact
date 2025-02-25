@@ -1,11 +1,12 @@
-import React from "react";
+import React from "react"
 import UsersAndGroupsContentListItem from './users-and-groups-content-list-item'
-import { Loader, useFetchChats } from "../../../../shared";
-import { useSelector } from "react-redux";
+import { Loader, useFetchChats } from "../../../../shared"
+import { useSelector } from "react-redux"
 
 export const UsersAndGroupsContentList = () => {
     const searchInputValue = useSelector((state) => state.usersAndGroups.searchInputValue)
-    const { data, loading } = useFetchChats(searchInputValue)
+    const { data, loading} = useFetchChats(searchInputValue)
+
 
     if (loading) {
         return <Loader />
@@ -18,7 +19,9 @@ export const UsersAndGroupsContentList = () => {
                 avatar={user.photoURL}
                 userName={user.displayName}
                 userId={user.uid} 
-                favorite={user.favorite}/>)}
+                favorite={user.favorite}
+                lastMessage={user.lastMessage}
+                countNotReadedMessage={user.countNotReadedMessage}/>)}
         </div>
     )
 }

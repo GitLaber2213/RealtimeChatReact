@@ -2,13 +2,15 @@ import { useEffect } from "react"
 import { useMessages } from "../firebase-hooks/use-messages"
 
 
-export const useObserver = (ref, messageId) => {
+export const useObserver = (ref, messageId, readedStatus) => {
     const { readingMessage } = useMessages()
     useEffect(() => {
         const observer = new IntersectionObserver(([entries]) => {
             if (entries.isIntersecting) {
                 observer.unobserve(entries.target)
-                readingMessage(true, messageId)
+                if(!readedStatus) {
+                    readingMessage(true, messageId)
+                }
             }
         }, { threshold: 1 })
 

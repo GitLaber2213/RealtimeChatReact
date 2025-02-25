@@ -1,7 +1,7 @@
-import React from "react";
-import classes from "./Profile.module.css";
-import { Button, ErrorInfo, Loader, useAuth } from "../../../shared";
-import { useUpdateProfile } from "../../../shared/lib/firebase-hooks/use-update-profile";
+import React from "react"
+import classes from "./Profile.module.css"
+import { Button, ErrorInfo, Loader, useAuth } from "../../../shared"
+import { useUpdateProfile } from "../../../shared/lib/firebase-hooks/use-update-profile"
 
 
 export const OptionalMenu = ({userInfo, setIsActive}) => {
@@ -22,5 +22,5 @@ export const OptionalMenu = ({userInfo, setIsActive}) => {
             <Button text={"Save"} handleClick={() => handleUpdateProfileClick(userInfo)}/>
             <Button text={"Cancel"}  handleClick={() => setIsActive(false)}/>
         </div>
-    );
-};
+    )
+}

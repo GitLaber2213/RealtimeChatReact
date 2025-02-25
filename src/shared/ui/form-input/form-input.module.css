@@ -1,15 +1,24 @@
 .loginUnContainer {
     display: flex;
-    margin: 5px;
+    margin: 5x;
+}
+
+.loginUnContainer div {
+    margin: auto 10px;
+}
+
+.loginUnContainer img {
+    margin: auto 10px;
 }
 
 .loginUnContainer input:-webkit-autofill {
-    transition: all 100000000000s ease-in-out; /* Костыль */
+    transition: all 60s ease-in-out; /* Костыль */
 }
 
 .loginUnContainer input {
     width: 100%;
     background-color: transparent;
+    
     margin-left: 10px;
     color: white;
     font-size: 14px;

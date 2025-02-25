@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 import classes from './side-bar-content-list-item.module.css'
-import { ItemInList } from "../../../../shared";
+import { ItemInList } from "../../../../shared"
 
 
 export const SideBarContentListItem = ({ handleClick, image, text, imgHeight, imgWidth }) => {

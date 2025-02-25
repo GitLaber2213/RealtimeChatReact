@@ -1,6 +1,33 @@
-.profileHeader{
+.profileHeader {
     font-size: 24px;
     margin-bottom: 20px;
+    position: relative;
+}
+
+.profileHeader.active::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    transform: translateY(+50%);
+    background-image: var(--add-image-icon);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 6.7%;
+    border-radius: 25%;
+    bottom: 0;
+    background-color: rgb(58, 138, 78);
+    border: 5px solid rgb(39, 59, 44);
+    opacity: 0;
+    pointer-events: none;
+    transition: .2s;
+}
+
+.profileHeader.active:hover::after {
+    width: 20px;
+    height: 20px;
+    opacity: 1;
 }
 
 .profileContent {
@@ -60,4 +87,16 @@
 
 .optionalMenu {
     margin-bottom: 45px;
+}
+
+.changeAvatar {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+}
+
+.changeAvatar.active {
+    width: 300px;
+    height: 300px;
 }

@@ -1,11 +1,11 @@
-import React from "react";
+import React from "react"
 import classes from './menu-list.module.css'
-import MenuItem from "./menu-item";
+import MenuItem from "./menu-item"
 
 import starPhoto from '../../../../shared/assets/star.png'
 import deletePhoto from '../../../../shared/assets/delete.png'
-import { useFavorites } from "../../../../shared";
-import { useParams } from "react-router-dom";
+import { useFavorites } from "../../../../shared"
+import { useParams } from "react-router-dom"
 
 
 export const MenuList = () => {

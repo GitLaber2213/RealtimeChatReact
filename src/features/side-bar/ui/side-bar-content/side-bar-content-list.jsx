@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import classes from './side-bar-content-list.module.css'
-import SideBarContentListItem from "./side-bar-content-list-item";
+import SideBarContentListItem from "./side-bar-content-list-item"
 import profilePhoto from '../../../../shared/assets/userName.png'
 import groupPhoto from '../../../../shared/assets/group.png'
 import logoutPhoto from '../../../../shared/assets/logout.png'
-import { useAuth } from "../../../../shared";
-import { ModalWindow } from "../../../../entites";
-import Profile from "../../../profile/ui/profile";
-import CreateGroup from "../../../create-group/ui/create-group";
+import { useAuth } from "../../../../shared"
+import { ModalWindow } from "../../../../entites"
+import Profile from "../../../profile/ui/profile"
+import CreateGroup from "../../../create-group/ui/create-group"
 
 export const SideBarContentList = () => {
     const { doSignOut } = useAuth()

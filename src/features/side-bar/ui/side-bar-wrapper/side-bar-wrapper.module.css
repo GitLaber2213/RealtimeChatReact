@@ -1,10 +1,13 @@
 .siteBarContainer {
     width: 55px;
+    flex-shrink: 0;
     transition: .1s;
+    overflow: hidden;
+    display: flex;
 }
 
 .siteBarContainer:hover {
-    width: 350px;
+    width: 250px;
 }
 
 .siteBarContent {
@@ -12,5 +15,4 @@
     height: 100%;
     background-color: rgb(19, 27, 21);
     box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, .5);
-    width: 250px;
 }

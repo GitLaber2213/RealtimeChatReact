@@ -15,6 +15,7 @@ import WebSiteIcon from './assets/website.png'
 import EditIcon from './assets/editIcon.png'
 import PasswordIcon from './assets/password.png'
 import EnterMessageIcon from './assets/enterMessageIcon.png'
+import AddImageIcon from './assets/addImageIcon.png'
 
 export {
     DeleteIcon,
@@ -32,7 +33,8 @@ export {
     WebSiteIcon,
     EditIcon,
     PasswordIcon,
-    EnterMessageIcon
+    EnterMessageIcon,
+    AddImageIcon
 }
 
 //UI//

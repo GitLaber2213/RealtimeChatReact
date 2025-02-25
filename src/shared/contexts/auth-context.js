@@ -1,6 +1,6 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { createContext, useEffect, useMemo, useState } from "react";
-import { auth } from "../firebase/firebase-config";
+import { onAuthStateChanged, signOut } from "firebase/auth"
+import { createContext, useEffect, useMemo, useState } from "react"
+import { auth } from "../firebase/firebase-config"
 
 
 
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
         await signOut(auth)
         setUser(null)
         setUid(null)
-    };
+    }
 
     const value = useMemo(() => ({
         user,

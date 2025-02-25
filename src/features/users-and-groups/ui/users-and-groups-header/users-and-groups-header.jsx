@@ -1,8 +1,8 @@
-import React from "react";
+import React from "react"
 import classes from './users-and-groups-header.module.css'
-import { FindUsers } from "../../../../entites";
-import { useDispatch, useSelector } from "react-redux";
-import { usersAndGroupsSlice } from "../../model/users-and-groups.slice";
+import { FindUsers } from "../../../../entites"
+import { useDispatch, useSelector } from "react-redux"
+import { usersAndGroupsSlice } from "../../model/users-and-groups.slice"
 
 
 export const UsersAndGroupsHeader = () => {

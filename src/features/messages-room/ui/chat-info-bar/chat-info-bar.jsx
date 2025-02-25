@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import classes from './message-room-header.module.css'
 import dropDownMenuPhoto from '../../../../shared/assets/dropDownMenu.png'
-import { ItemInList, useFetchUserByUid, UserIcon } from "../../../../shared";
-import { useParams } from "react-router-dom";
-import EnterChat from "../enter-chat/enter-chat";
-import DropDownMenu from "../drop-down-menu/drop-down-menu";
-import Profile from "../../../profile/ui/profile";
-import { ModalWindow } from "../../../../entites";
+import { ItemInList, useFetchUserByUid, UserIcon } from "../../../../shared"
+import { useParams } from "react-router-dom"
+import EnterChat from "../enter-chat/enter-chat"
+import DropDownMenu from "../drop-down-menu/drop-down-menu"
+import Profile from "../../../profile/ui/profile"
+import { ModalWindow } from "../../../../entites"
 
 
 const ChatInfoBar = () => {

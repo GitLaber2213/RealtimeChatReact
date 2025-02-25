@@ -9,7 +9,7 @@
 }
 
 .lastMessage {
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
     color: rgb(255, 255, 255);
     font-size: 12px;
     width: 100%;

@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 import classes from './menu-item.module.css'
-import { ItemInList } from "../../../../shared";
+import { ItemInList } from "../../../../shared"
 
 export const MenuItem = ({ text, image, imgHeight, imgWidth, handleClick, loading }) => {
     return (

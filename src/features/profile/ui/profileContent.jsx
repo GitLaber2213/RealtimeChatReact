@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import classes from './Profile.module.css'
-import { FormInput, ItemInList, UserIcon } from "../../../shared";
+import { FormInput, ItemInList, UserIcon } from "../../../shared"
 
 
-export const ProfileContent = ({ inputType = "text", img, imgHeight, imgWidth, placeholder, onEdit, value, handleChangeInput }) => {
+export const ProfileContent = ({ inputType = "text", img, imgHeight, imgWidth, placeholder, onEdit, value, handleChangeInput, handleImageClick }) => {
     const [edit, setEdit] = useState(false)
 
 
@@ -15,8 +15,8 @@ export const ProfileContent = ({ inputType = "text", img, imgHeight, imgWidth, p
 
                 {onEdit && <div className={value === '' ? classes.editBtn + ' ' + classes.editBtnActive : classes.editBtn}>edit?</div>}
 
-                {edit ? <FormInput type={inputType} placeholder={placeholder} img={img} imgHeight={imgHeight} imgWidth={imgWidth} value={value} onChange={handleChangeInput} /> :
-                    <ItemInList image={!img ? UserIcon : img} text={value} imgHeight={imgHeight} imgWidth={imgWidth} />}
+                {edit ? <FormInput type={inputType} handleImageClick={handleImageClick} placeholder={placeholder} img={img} imgHeight={imgHeight} imgWidth={imgWidth} value={value} onChange={handleChangeInput} /> :
+                    <ItemInList image={img} handleImageClick={handleImageClick} text={value} imgHeight={imgHeight} imgWidth={imgWidth} />}
             </div>
         </div>
     )

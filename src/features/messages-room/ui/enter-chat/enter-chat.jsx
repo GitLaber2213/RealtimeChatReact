@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import classes from './enter-chat.module.css'
 
 

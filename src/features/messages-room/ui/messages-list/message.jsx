@@ -1,12 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef } from "react"
 import classes from './message.module.css'
-import { useObserver } from "../../../../shared";
+import { useObserver } from "../../../../shared"
 
 
 const Message = ({ message, messageId,  timeStamp, myMessage, readed }) => {
     const messageRef = useRef()
-
-    useObserver(messageRef, messageId)
+    useObserver(messageRef, messageId, readed)
 
     const readedMessageStyle = readed ? classes.readItem + ' ' + classes.active : classes.readItem
 

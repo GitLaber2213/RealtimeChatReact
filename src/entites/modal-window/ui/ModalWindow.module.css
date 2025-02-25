@@ -13,7 +13,6 @@
     opacity: 0;
     transition: .2s ease-in-out;
     z-index: 1;
-    overflow: scroll;
 }
 
 .modalWindowContainer.active {
@@ -23,7 +22,7 @@
 }
 
 .modalWindowUnContainer {
-    max-height: 450px;
+    max-height: 1000px;
     max-width: 1000px;
     width: 300px;
     background-color: rgb(39, 59, 44);
@@ -47,7 +46,7 @@
 }
 
 .windowHead {
-    margin: auto 0; 
+    margin: auto 0;
 }
 
 .closeWindowBtnContainer {

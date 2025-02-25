@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 import classes from './find-user.module.css'
-import { SearchInput } from "../../shared";
+import { SearchInput } from "../../shared"
 
 
 

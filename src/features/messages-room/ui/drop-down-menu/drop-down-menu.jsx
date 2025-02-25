@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 import classes from './drop-down-menu.module.css'
-import MenuList from "./menu-list";
+import MenuList from "./menu-list"
 
 
 

@@ -1,23 +1,22 @@
-import { getAuth } from 'firebase/auth';
-import firebase from 'firebase/compat/app';
-import { getFirestore } from "firebase/firestore";
+import { getAuth } from 'firebase/auth'
+import firebase from 'firebase/compat/app'
+import { getFirestore } from "firebase/firestore"
 
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCTrMIMYXOdtHGbtNi727TabUmFGdlIYsk",
-    authDomain: "real-time-chat-41c7f.firebaseapp.com",
-    databaseURL: "https://real-time-chat-41c7f-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "real-time-chat-41c7f",
-    storageBucket: "real-time-chat-41c7f.firebasestorage.app",
-    messagingSenderId: "443825379882",
-    appId: "1:443825379882:web:1fe9bb09ca13247382c153",
-    measurementId: "G-XDPKGJ7MF8"
+    apiKey: "AIzaSyADYOb9L3f4x5druPD9Z0nsDOXqI0rC5Ss",
+    authDomain: "real-time-shat.firebaseapp.com",
+    projectId: "real-time-shat",
+    storageBucket: "real-time-shat.firebasestorage.app",
+    messagingSenderId: "354073183953",
+    appId: "1:354073183953:web:321fb3c6f0d87e932a67f0",
+    measurementId: "G-C8J5N5JBVX"
 }
 
 
-const app = firebase.initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const firestoreDB = getFirestore(app);
+const app = firebase.initializeApp(firebaseConfig)
+const auth = getAuth(app)
+const firestoreDB = getFirestore(app)
 
 export {app, auth, firestoreDB }

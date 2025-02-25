@@ -6,4 +6,5 @@
     height: 100%;
     cursor: ew-resize;
     z-index: 0;
+    direction: right;
 }

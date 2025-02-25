@@ -11,8 +11,8 @@ export const UsersAndGroupsList = () => {
 
 
     return (
-        <div className={classes.chatsContainer} style={{ width: `${width}px` }}>
-            <ResizableElement setWidth={setWidth} width={width} />
+        <div className={classes.chatsContainer} style={{ width: `${width}px`  }}>
+            <ResizableElement setWidth={setWidth} width={width} direction={'right'} />
             <ScrollBar shouldScroll={false}>
                 <UsersAndGroupsHeader />
                 <UsersAndGroupsContentList />

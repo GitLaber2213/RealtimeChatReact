@@ -1,19 +1,16 @@
-import React from "react";
+import React from "react"
 import classes from './users-and-groups-content-list-item.module.css'
-import { Chat } from "../../../../entites";
-import { useNavigate, useParams } from "react-router-dom";
-import { RouteConstants } from "../../../../shared/constants/constants";
-import { useDispatch } from "react-redux";
-import { usersAndGroupsSlice } from "../../model/users-and-groups.slice";
-import { useMessages } from "../../../../shared";
+import { Chat } from "../../../../entites"
+import { useNavigate, useParams } from "react-router-dom"
+import { RouteConstants } from "../../../../shared/constants/constants"
+import { useDispatch } from "react-redux"
+import { usersAndGroupsSlice } from "../../model/users-and-groups.slice"
 
 
-export const UsersAndGroupsContentListItem = ({ userName, userId, avatar, favorite }) => {
+export const UsersAndGroupsContentListItem = ({ userName, userId, avatar, favorite, lastMessage, countNotReadedMessage }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    
     const { id } = useParams()
-    const { lastMessage, countNotReadedMessage } = useMessages()
 
 
     const handleClick = (userId) => {

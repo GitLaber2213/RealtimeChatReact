@@ -20,7 +20,7 @@ export const useUpdateProfile = () => {
 
             setError(undefined)
         } catch (error) {
-            setError(error.message);
+            setError(error.message)
         } finally {
             setLoading(false)
         }

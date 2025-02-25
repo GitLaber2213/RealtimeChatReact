@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 import classes from './chat.module.css'
-import { ItemInList, UserIcon } from "../../../shared";
+import { ItemInList, UserIcon } from "../../../shared"
 
 
 export const Chat = ({ avatar, userName, activeChat, favorite, lastMessage, countNotReadedMessage }) => {

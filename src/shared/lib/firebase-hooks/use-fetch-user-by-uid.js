@@ -5,7 +5,7 @@ import { FirebaseConstants } from "../../constants/constants"
 
 export const useFetchUserByUid = (uid) => {
     const [loading, setLoading] = useState(false)
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([])
 
     useEffect(() => {
         if (!uid) return

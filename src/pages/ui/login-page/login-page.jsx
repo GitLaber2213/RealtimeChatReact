@@ -1,6 +1,6 @@
-import React from "react";
-import Layout from "../../../app/layouts/layout";
-import { Login } from "../../../features";
+import React from "react"
+import Layout from "../../../app/layouts/layout"
+import { Login } from "../../../features"
 
 export const LoginPage = () => {
     return (
@@ -11,4 +11,4 @@ export const LoginPage = () => {
 }
 
 
-export default LoginPage;
+export default LoginPage

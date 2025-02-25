@@ -27,7 +27,10 @@ export const useHandleSignIn = (authType) => {
                         email: user.user.email,
                         photoURL: user.user.photoURL,
                         uid: user.user.uid,
-                        favorite: false
+                        phone: "",
+                        favorite: false,
+                        lastMessage: {},
+                        countNotReadedMessage: 0
                     })
                     break
             }
