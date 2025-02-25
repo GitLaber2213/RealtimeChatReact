@@ -1,6 +1,6 @@
 .chatsContainer {
-    min-width: 15%;
     max-width: 75%;
+    width: var(--width);
     height: 100vh;
     background-color: rgb(39, 54, 43);
     border-right: 1px solid rgb(25, 34, 27);

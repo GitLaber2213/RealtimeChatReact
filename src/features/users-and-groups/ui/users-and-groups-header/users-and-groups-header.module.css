@@ -1,5 +1,8 @@
 .chatsHeader {
     height: 50px;
-    width: 100%;
     border-bottom: 1px solid rgb(22, 34, 26);
 }
+
+.chatsHeader.disable {
+    opacity: 0;
+} 

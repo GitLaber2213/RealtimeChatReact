@@ -6,6 +6,7 @@
 .lastMessageContainer {
     width: 10%;
     flex: auto;
+    z-index: 1;
 }
 
 .lastMessage {
@@ -24,6 +25,11 @@
     width: 40px;
 }
 
+.timeAndMessageCount.disable {
+    width: 0;
+    visibility: hidden;
+}
+
 .timeAndMessageCount div {
     display: flex;
     align-items: center;
@@ -37,20 +43,30 @@
 }
 
 .notReadedMessagesCount {
-    margin-top: 5px;
-    width: max-content;
-    padding: 3px;
+    margin-top: 12px;
+    max-width: 50px;
+    min-width: 14px;
+    height: 14px;
+    padding: 2px;
     color: white;
-    border-radius: 45%;
+    border-radius: 100rem;
     background-color: rgb(67, 167, 87);
 }
 
 .notReadedMessagesCount.active {
-    margin-top: 5px;
-    width: max-content;
-    padding: 3px;
-    border-radius: 45%;
+    margin-top: 12px;
+    max-width: 50px;
+    min-width: 14px;
+    height: 14px;
+    padding: 2px;
+    color: white;
+    border-radius: 100rem;
     background-color: rgb(255, 255, 255);
     color: rgb(47, 66, 52);
 }
 
+.minimized {
+    visibility: visible;
+    margin-right: 30px;
+    z-index: 1;
+}

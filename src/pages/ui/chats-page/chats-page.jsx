@@ -1,6 +1,6 @@
 import React from "react"
 import { SideBar, UsersAndGroupsList, MessagesRoom } from "../../../features/"
-import Layout from "../../../app/layouts/layout"
+import Layout from "../layout/layout"
 
 export const ChatsPage = () => {
 

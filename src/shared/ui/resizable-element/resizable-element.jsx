@@ -1,7 +1,7 @@
 import React, { useRef } from "react"
 import classes from './resizable-element.module.css'
 
-export const ResizableElement = ({ width, setWidth }) => {
+export const ResizableElement = ({ width, setWidth, triggerWidth, minWidth }) => {
     const containerRef = useRef(null)
 
     const handleMouseDown = (event) => {
@@ -14,6 +14,10 @@ export const ResizableElement = ({ width, setWidth }) => {
         const onMouseMove = (moveEvent) => {
             const newWidth = startWidth + (moveEvent.clientX - startX) * sensitivityFactor
             setWidth(newWidth)
+
+            if(newWidth < triggerWidth) {
+                setWidth(minWidth)
+            }
         }
 
         const onMouseUp = () => {

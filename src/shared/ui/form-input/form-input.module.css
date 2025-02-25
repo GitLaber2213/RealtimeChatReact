@@ -1,6 +1,5 @@
 .loginUnContainer {
     display: flex;
-    margin: 5x;
 }
 
 .loginUnContainer div {
@@ -12,7 +11,7 @@
 }
 
 .loginUnContainer input:-webkit-autofill {
-    transition: all 60s ease-in-out; /* Костыль */
+    transition: all 600000000000s ease-in-out; /* Костыль */
 }
 
 .loginUnContainer input {

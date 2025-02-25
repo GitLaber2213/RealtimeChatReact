@@ -22,6 +22,7 @@ export const useHandleSignIn = (authType) => {
                     break
                 case "signup":
                     const user = await createUserWithEmailAndPassword(auth, email, password)
+                    await updateProfile(user.user, { displayName: displayName })
                     await setDoc(doc(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_USERS, user.user.uid), {
                         displayName: user.user.displayName,
                         email: user.user.email,
