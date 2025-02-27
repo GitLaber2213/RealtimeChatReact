@@ -77,3 +77,6 @@ export const useFavorites = (userId) => {
 
     return { loading, error, addFavorite, deleteFavorite, isFavorite }
 }
+
+
+export default useFavorites

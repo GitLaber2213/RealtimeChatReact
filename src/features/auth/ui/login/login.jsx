@@ -4,13 +4,11 @@ import { AuthSwitch, Form } from "../../../../entites"
 import { RouteConstants } from "../../../../shared"
 import { Button, EmailIcon, FormInput, Loader, PasswordIcon, useAuth } from "../../../../shared"
 import { useHandleSignIn } from "../../hooks/use-handle-sign-in"
-import { useNavigate } from "react-router-dom"
 
 export const Login = () => {
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
-  const navigate = useNavigate()
-  const { handleSignIn, error, loading } = useHandleSignIn("login")
+  const { handleSignIn, error, loading, navigate } = useHandleSignIn("login")
 
   const handleSubmit = async (event, email, password) => {
     event.preventDefault()

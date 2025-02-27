@@ -1,10 +1,7 @@
 import React from "react"
 import classes from './menu-list.module.css'
 import MenuItem from "./menu-item"
-
-import starPhoto from '../../../../shared/assets/star.png'
-import deletePhoto from '../../../../shared/assets/delete.png'
-import { useFavorites, useMessages } from "../../../../shared"
+import { DeleteIcon, FavoriteIcon, useFavorites, useMessages } from "../../../../shared"
 import { useParams } from "react-router-dom"
 
 
@@ -30,14 +27,14 @@ export const MenuList = () => {
         <div className={classes.menuList}>
             <MenuItem
                 handleClick={isFavorite ? handleDeleteFavorite : handleAddFavorite}
-                image={starPhoto}
+                image={FavoriteIcon}
                 text={isFavorite ? "Delete from favorite" : "Add in favorite"}
                 imgHeight={25}
                 imgWidth={25}
                 loading={loading} />
                 
             <MenuItem handleClick={handleDeleteMessages}
-                image={deletePhoto}
+                image={DeleteIcon}
                 text={"Delete chat"}
                 imgHeight={25}
                 imgWidth={25} />

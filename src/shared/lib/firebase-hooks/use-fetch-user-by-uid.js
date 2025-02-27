@@ -24,3 +24,6 @@ export const useFetchUserByUid = (uid) => {
 
     return { loading, data }
 }
+
+
+export default useFetchUserByUid

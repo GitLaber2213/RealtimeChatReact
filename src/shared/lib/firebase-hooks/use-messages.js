@@ -14,9 +14,11 @@ export const useMessages = () => {
 
     const [messages, setMessages] = useState([])
     const [loadingSendMessage, setLoadingSendMessage] = useState(false)
+    const [loadingMessages, setLoadingMessages] = useState(false)
 
 
     useEffect(() => {
+        setLoadingMessages(true)
         const messagesQuery = query(
             collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_MESSAGES),
             where("participants", "array-contains-any", [uid]),
@@ -26,12 +28,14 @@ export const useMessages = () => {
             const messageArray = []
             doc.forEach((message) => {
                 if (message.data().participants.includes(id)) {
-                    messageArray.push({ messageId: message.id, messageRef: message.ref, ...message.data() })
+                    messageArray.push({ messageId: message.id, myMessage: message.data().uid !== id, messageRef: message.ref, ...message.data() })
                 }
             })
 
             setMessages(messageArray)
+            setLoadingMessages(false)
         })
+
         return () => {
             unsubscribe()
         }
@@ -91,5 +95,7 @@ export const useMessages = () => {
         }
     }
 
-    return { sendMessage, readingMessage, deleteChat, messages, loadingSendMessage }
+    return { sendMessage, readingMessage, deleteChat, messages, loadingSendMessage, loadingMessages, id }
 }
+
+export default useMessages

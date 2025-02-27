@@ -3,8 +3,9 @@ import classes from './message.module.css'
 import { useObserver } from "../../../../shared"
 
 
-const Message = ({ message, messageId,  timeStamp, myMessage, readed }) => {
+const Message = ({ message, messageId, timeStamp, myMessage, readed }) => {
     const messageRef = useRef()
+
     useObserver(messageRef, messageId, readed)
 
     const readedMessageStyle = readed ? classes.readItem + ' ' + classes.active : classes.readItem
@@ -17,7 +18,7 @@ const Message = ({ message, messageId,  timeStamp, myMessage, readed }) => {
                 </div>
 
                 <div className={classes.messageInfo}>
-                    <div className={!myMessage ? classes.readed + ' ' + classes.disable : classes.readed}>
+                    <div className={myMessage ? classes.readed : classes.readed + ' ' + classes.disable}>
                         <div className={readedMessageStyle}></div>
                         <div className={readedMessageStyle}></div>
                     </div>

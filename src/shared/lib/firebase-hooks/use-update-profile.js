@@ -29,3 +29,5 @@ export const useUpdateProfile = () => {
 
     return { loading, info, handleUpdateProfile }
 }
+
+export default useUpdateProfile

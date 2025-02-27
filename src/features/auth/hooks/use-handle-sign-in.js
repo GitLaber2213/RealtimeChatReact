@@ -41,5 +41,8 @@ export const useHandleSignIn = (authType) => {
         }
     }
 
-    return { error, loading, handleSignIn }
+    return { error, loading, handleSignIn, navigate }
 }
+
+
+export default useHandleSignIn

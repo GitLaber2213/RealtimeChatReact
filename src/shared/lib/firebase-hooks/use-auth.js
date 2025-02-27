@@ -5,3 +5,5 @@ export const useAuth = () => {
     const value = useContext(AuthContext)
     return value 
 }
+
+export default useAuth

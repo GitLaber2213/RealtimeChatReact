@@ -13,3 +13,5 @@ export const usersAndGroupsSlice = createSlice({
 
     }
 })
+
+export default usersAndGroupsSlice

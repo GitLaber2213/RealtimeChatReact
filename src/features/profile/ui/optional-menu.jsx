@@ -25,3 +25,5 @@ export const OptionalMenu = ({ userInfo, setIsActive }) => {
         </div>
     )
 }
+
+export default OptionalMenu

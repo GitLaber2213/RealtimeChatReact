@@ -1,17 +1,21 @@
 import React from "react"
-import { ScrollBar, useMessages } from "../../../../shared"
+import { Loader, ScrollBar, useMessages } from "../../../../shared"
 import Message from "./message"
-import { useParams } from "react-router-dom"
-
 
 export const MessagesList = () => {
-    const { id } = useParams()
-    const { messages } = useMessages()
+    const { messages, loadingMessages } = useMessages()
 
+    if (loadingMessages) return <Loader />
 
     return (
         <ScrollBar shouldScroll={true}>
-            {messages.map(message => <Message key={message.messageId} messageId={message.messageId} message={message.message} timeStamp={message.timestamp} myMessage={message.uid !== id} readed={message.readed}/>)}
+            {messages.map(message => <Message
+                key={message.messageId}
+                messageId={message.messageId}
+                message={message.message}
+                timeStamp={message.timestamp}
+                myMessage={message.myMessage}
+                readed={message.readed} />)}
         </ScrollBar>
     )
 }

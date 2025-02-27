@@ -17,3 +17,5 @@ export const Form = ({ error, title, children, handleSubmit }) => {
         </div>
     )
 }
+
+export default Form

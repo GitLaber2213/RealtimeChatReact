@@ -6,7 +6,6 @@ export const useMessageSender = () => {
     const { sendMessage, loadingSendMessage } = useMessages()
 
 
-
     const handleChange = (event) => {
         setMessageSenderText(event.target.value)
     }
@@ -26,3 +25,5 @@ export const useMessageSender = () => {
 
     return { handleChange, handleSendMessage, handleKeyDown, messageSenderText, loadingSendMessage }
 }
+
+export default useMessageSender

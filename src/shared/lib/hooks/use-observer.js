@@ -25,3 +25,5 @@ export const useObserver = (ref, messageId, readedStatus) => {
         }
     }, [ref])
 }
+
+export default useObserver

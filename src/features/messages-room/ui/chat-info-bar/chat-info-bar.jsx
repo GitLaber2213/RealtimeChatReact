@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import classes from './message-room-header.module.css'
-import dropDownMenuPhoto from '../../../../shared/assets/dropDownMenu.png'
-import { ItemInList, useFetchUserByUid, UserIcon } from "../../../../shared"
+import { DropDownMenuIcon, ItemInList, useFetchUserByUid, UserIcon } from "../../../../shared"
 import { useParams } from "react-router-dom"
 import EnterChat from "../enter-chat/enter-chat"
 import DropDownMenu from "../drop-down-menu/drop-down-menu"
@@ -33,7 +32,7 @@ const ChatInfoBar = () => {
                     <ItemInList handleClick={() => setIsActiveProfile(true)} image={data.avatar ? data.avatar : UserIcon} text={data.displayName} imgHeight={40} imgWidth={40} />
                 </div>
                 <div className={isActiveMenu ? classes.openMenuBtn + ' ' + classes.active : classes.openMenuBtn}>
-                    <ItemInList handleClick={() => setIsActiveMenu(true)} image={dropDownMenuPhoto} imgHeight={20} imgWidth={20} />
+                    <ItemInList handleClick={() => setIsActiveMenu(true)} image={DropDownMenuIcon} imgHeight={20} imgWidth={20} />
                 </div>
             </div>
 

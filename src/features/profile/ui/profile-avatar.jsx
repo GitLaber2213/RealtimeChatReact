@@ -42,7 +42,16 @@ export const ProfileAvatar = ({ userInfo, handleImageClick, setUserInfo, editAva
                     ...colorStyle
                 }}
                 label="Choose avatar"
+                onBeforeFileLoad={(file) => {
+                    if (file.size > 2000000) {
+                        alert("File size cannot exceed 2MB");
+                        return
+                    }
+                }}
             />
         </div>
     )
 }
+
+
+export default ProfileAvatar

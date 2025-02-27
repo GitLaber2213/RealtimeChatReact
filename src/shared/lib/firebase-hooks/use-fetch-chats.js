@@ -117,3 +117,5 @@ export const useFetchChats = (searchInputValue) => {
 
     return { loading, data }
 }
+
+export default useFetchChats

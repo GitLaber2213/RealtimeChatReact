@@ -41,3 +41,5 @@ export const useProfileHandler = (uid) => {
 
     return { loading, data, userInfo, setUserInfo, setEditAvatar, handleChangeInput, handleImageClick, editAvatar }
 }
+
+export default useProfileHandler

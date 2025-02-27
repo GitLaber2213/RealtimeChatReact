@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { Button, EmailIcon, FormInput, Loader, PasswordIcon, UserNameIcon } from "../../../../shared"
-import { useNavigate } from "react-router-dom"
 import { RouteConstants } from "../../../../shared"
 import { AuthSwitch, Form } from "../../../../entites"
 import { useHandleSignIn } from "../../hooks/use-handle-sign-in"
@@ -11,8 +10,7 @@ export const SignUp = () => {
     const [displayName, setDisplayName] = useState('')
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
-    const navigate = useNavigate()
-    const { handleSignIn, error, loading } = useHandleSignIn("signup")
+    const { handleSignIn, error, loading, navigate } = useHandleSignIn("signup")
 
 
     const handleClick = async (event, email, password) => {
