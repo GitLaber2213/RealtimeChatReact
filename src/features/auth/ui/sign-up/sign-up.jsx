@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Button, EmailIcon, FormInput, Loader, PasswordIcon, UserNameIcon } from "../../../../shared"
 import { useNavigate } from "react-router-dom"
-import { RouteConstants } from "../../../../shared/constants/constants"
+import { RouteConstants } from "../../../../shared"
 import { AuthSwitch, Form } from "../../../../entites"
 import { useHandleSignIn } from "../../hooks/use-handle-sign-in"
 import classes from './sign-up.module.css'

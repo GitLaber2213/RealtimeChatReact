@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { FirebaseConstants, RouteConstants } from "../../../shared/constants/constants"
+import { FirebaseConstants, RouteConstants } from "../../../shared"
 import { useAuth } from "../../../shared"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { useState } from "react"
@@ -29,9 +29,7 @@ export const useHandleSignIn = (authType) => {
                         photoURL: user.user.photoURL,
                         uid: user.user.uid,
                         phone: "",
-                        favorite: false,
-                        lastMessage: {},
-                        countNotReadedMessage: 0
+                        avatar: null,
                     })
                     break
             }

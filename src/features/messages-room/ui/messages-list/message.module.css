@@ -79,3 +79,7 @@
 .active {
     background-color: rgb(11, 236, 79);
 }
+
+.error {
+    background-color: rgb(255, 0, 0);
+}

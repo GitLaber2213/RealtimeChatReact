@@ -16,7 +16,7 @@ export const UsersAndGroupsContentList = ({ minWidth }) => {
         <div>
             {data.map((user) => <UsersAndGroupsContentListItem
                 key={user.uid}
-                avatar={user.photoURL}
+                avatar={user.avatar}
                 userName={user.displayName}
                 userId={user.uid}
                 favorite={user.favorite}

@@ -11,12 +11,16 @@
 
 .lastMessage {
     text-overflow: ellipsis;
-    color: rgb(255, 255, 255);
+    color: rgb(204, 204, 204);
     font-size: 12px;
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
     display: block;
+}
+
+.lastMessage.active {
+    color: rgb(255, 255, 255);
 }
 
 .timeAndMessageCount {
@@ -40,6 +44,10 @@
 
 .timeStamp {
     margin-top: 6px;
+}
+
+.timeStamp.active {
+    color: white;
 }
 
 .notReadedMessagesCount {

@@ -30,7 +30,7 @@ const ChatInfoBar = () => {
         <>
             <div className={classes.messagesRoomHeader}>
                 <div className={classes.profileInfo}>
-                    <ItemInList handleClick={() => setIsActiveProfile(true)} image={UserIcon} text={data.displayName} imgHeight={40} imgWidth={40} />
+                    <ItemInList handleClick={() => setIsActiveProfile(true)} image={data.avatar ? data.avatar : UserIcon} text={data.displayName} imgHeight={40} imgWidth={40} />
                 </div>
                 <div className={isActiveMenu ? classes.openMenuBtn + ' ' + classes.active : classes.openMenuBtn}>
                     <ItemInList handleClick={() => setIsActiveMenu(true)} image={dropDownMenuPhoto} imgHeight={20} imgWidth={20} />

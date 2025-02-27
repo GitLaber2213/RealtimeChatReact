@@ -45,7 +45,7 @@ export { ResizableElement } from './ui/resizable-element/resizable-element'
 export { Button } from './ui/button/button'
 export { ScrollBar } from './ui/scroll-bar/scroll-bar'
 export { Loader } from './ui/loader/loader'
-export { ErrorInfo } from './ui/error-info/error-info'
+export { Info } from './ui/error-info/info'
 
 //LIB//
 export { useObserver } from './lib/hooks/use-observer'
@@ -53,10 +53,11 @@ export { useAuth } from './lib/firebase-hooks/use-auth'
 export { useFetchChats } from './lib/firebase-hooks/use-fetch-chats'
 export { useFetchUserByUid } from './lib/firebase-hooks/use-fetch-user-by-uid'
 export { useFavorites } from './lib/firebase-hooks/use-favorites'
+export { useUpdateProfile } from './lib/firebase-hooks/use-update-profile'
 export { useMessages } from './lib/firebase-hooks/use-messages'
 
 //CONSTANTS//
-export { Constants } from './constants/constants'
+export { SuccessConstants, FirebaseConstants, RouteConstants } from './constants/constants'
 
 //CONTEXTS//
 export { AuthContext } from './contexts/auth-context'

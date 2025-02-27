@@ -2,7 +2,7 @@ import React from "react"
 import classes from './users-and-groups-content-list-item.module.css'
 import { Chat } from "../../../../entites"
 import { useNavigate, useParams } from "react-router-dom"
-import { RouteConstants } from "../../../../shared/constants/constants"
+import { RouteConstants } from "../../../../shared"
 import { useDispatch } from "react-redux"
 import { usersAndGroupsSlice } from "../../model/users-and-groups.slice"
 

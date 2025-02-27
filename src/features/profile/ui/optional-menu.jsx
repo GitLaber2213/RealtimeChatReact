@@ -1,26 +1,27 @@
 import React from "react"
-import classes from "./Profile.module.css"
-import { Button, ErrorInfo, Loader, useAuth } from "../../../shared"
-import { useUpdateProfile } from "../../../shared/lib/firebase-hooks/use-update-profile"
+import classes from "./profile.module.css"
+import { Button, Info, Loader, SuccessConstants, useAuth, useUpdateProfile } from "../../../shared"
 
 
-export const OptionalMenu = ({userInfo, setIsActive}) => {
+export const OptionalMenu = ({ userInfo, setIsActive }) => {
     const { uid } = useAuth()
-    const {error, loading, handleUpdateProfile} = useUpdateProfile()
-    
-    const handleUpdateProfileClick = (userInfo) => {
-        handleUpdateProfile(userInfo, uid)
+    const { info, loading, handleUpdateProfile } = useUpdateProfile()
+
+    const handleUpdateProfileClick = async (userInfo) => {
+        await handleUpdateProfile(userInfo, uid)
+
     }
 
-    if(loading) {
-        <Loader />
+    if (loading) {
+        return <Loader />
     }
 
     return (
         <div className={classes.optionalMenu}>
-            { error !== undefined && <ErrorInfo errorText={error}/>}
-            <Button text={"Save"} handleClick={() => handleUpdateProfileClick(userInfo)}/>
-            <Button text={"Cancel"}  handleClick={() => setIsActive(false)}/>
+            {info !== undefined && info !== "success" && <Info text={info} />}
+            {info === "success" && <Info text={SuccessConstants.UPDATE_PROFILE_SUCCESSFULLY} error={false} />}
+            <Button text={"Save"} handleClick={() => handleUpdateProfileClick(userInfo)} />
+            <Button text={"Cancel"} handleClick={() => setIsActive(false)} />
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import classes from './Profile.module.css'
+import classes from './profile.module.css'
 import { FormInput, ItemInList, UserIcon } from "../../../shared"
 
 

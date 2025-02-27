@@ -3,60 +3,36 @@ import { firestoreDB } from "../../firebase/firebase-config"
 import { useEffect, useState } from "react"
 import { and, collection, limit, onSnapshot, orderBy, where } from "firebase/firestore"
 import { query } from "firebase/database"
-import { FirebaseConstants } from "../../constants/constants";
-import { useAuth } from "./use-auth";
+import { FirebaseConstants } from "../../../shared"
+import { useAuth } from "./use-auth"
 
 
 
 export const useFetchChats = (searchInputValue) => {
     const { uid } = useAuth()
-    const debounceSearchValue = useDebounce(searchInputValue, 500)
+    const [debounceSearchValue] = useDebounce(searchInputValue, 500)
 
-
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
-
 
     useEffect(() => {
         setLoading(true)
 
-        let usersArray = []
+        const usersArray = new Map() 
 
         const usersQuery = query(collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_USERS), where("uid", "!=", uid))
 
         const unsubscribeUsers = onSnapshot(usersQuery, (querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                usersArray.push({ id: doc.id, lastMessage: {}, countNotReadedMessage: 0, ...doc.data() })
+                const userData = { id: doc.id, lastMessage: {}, countNotReadedMessage: 0, favorite: false, ...doc.data() }
+                usersArray.set(userData.id, userData)
 
-
-                getLastMessage(doc.data().uid, (lastMessage) => {
-                    const userIndex = usersArray.findIndex(user => user.id === doc.id);
-
-                    if (userIndex >= 0) {
-                        usersArray[userIndex].lastMessage = lastMessage;
-                    }
-                    filteredData(usersArray)
-                })
-
-                getFavoriteStatus(doc.data().uid, (favorite) => {
-                    const userIndex = usersArray.findIndex(user => user.id === doc.id)
-                    if (userIndex >= 0) {
-                        usersArray[userIndex].favorite = favorite
-                    }
-                    filteredData(usersArray)
-                })
-
-                getCountNotReadedMessages(doc.data().uid, (count) => {
-                    const userIndex = usersArray.findIndex(user => user.id === doc.id)
-
-                    if (userIndex >= 0) {
-                        usersArray[userIndex].countNotReadedMessage = count
-                        console.log(usersArray[userIndex].countNotReadedMessage)
-                    }
-                    filteredData(usersArray)
-                })
+                getLastMessage(userData.id, usersArray)
+                getFavoriteStatus(userData.id, usersArray)
+                getCountNotReadedMessages(userData.id, usersArray)
             })
 
+            filteredData(Array.from(usersArray.values()))
 
             setLoading(false)
         }, (error) => {
@@ -65,78 +41,77 @@ export const useFetchChats = (searchInputValue) => {
 
         return () => unsubscribeUsers()
 
-    }, [debounceSearchValue[0], uid])
-
+    }, [debounceSearchValue, uid])
 
     const filteredData = (array) => {
         const filteredUsers = array.filter(user =>
             ["displayName", "email"].some((key) =>
-                user[key]?.toLowerCase().includes(debounceSearchValue[0]?.toLowerCase())
-            ))
+                user[key]?.toLowerCase().includes(debounceSearchValue?.toLowerCase())
+            )
+        )
 
         setData(filteredUsers)
     }
 
-    const getLastMessage = (userId, callback) => {
+    const getLastMessage = (userId, usersArray) => {
         const lastMessageQuery = query(
             collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_MESSAGES),
             where("participants", "array-contains-any", [userId]),
-            orderBy("timestamp", "desc"), limit(1))
+            orderBy("timestamp", "desc"),
+            limit(1)
+        )
 
-        const unsubscribe = onSnapshot(lastMessageQuery, (doc) => {
+        return onSnapshot(lastMessageQuery, (doc) => {
             doc.forEach((message) => {
-                if (message.data().participants.includes(uid)) {
-                    callback({ messageId: message.id, ...message.data() })
+                const userIndex = usersArray.get(userId)
+                if (userIndex && message.data().participants.includes(uid)) {
+                    userIndex.lastMessage = { messageId: message.id, ...message.data() }
+                    filteredData(Array.from(usersArray.values()))
                 }
             })
-        }, (error) => {
-            setLoading(false)
         })
-
-        return () => unsubscribe()
     }
 
-    const getFavoriteStatus = (userId, callback) => {
+    const getFavoriteStatus = (userId, usersArray) => {
         const favoritesQuery = query(
             collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_FAVORITES),
             where("uid", "==", uid),
-            limit(1))
+            limit(1)
+        )
 
-        const unsubscribe = onSnapshot(favoritesQuery, (doc) => {
+        return onSnapshot(favoritesQuery, (doc) => {
             doc.forEach((favorite) => {
-                callback(favorite.data().favorites.some(favoriteUser => favoriteUser.userId === userId))
+                const isFavorite = favorite.data().favorites.some(favoriteUser => favoriteUser.userId === userId)
+                const userIndex = usersArray.get(userId)
+                if (userIndex && favorite.data().favorites.includes(uid)) {
+                    userIndex.favorite = isFavorite
+                    filteredData(Array.from(usersArray.values()))
+                }
             })
-        }, (error) => {
-            setLoading(false)
         })
-
-        return () => unsubscribe()
     }
 
-
-    const getCountNotReadedMessages = (userId, callback) => {
+    const getCountNotReadedMessages = (userId, usersArray) => {
         const countNotReadedMessageQuery = query(
             collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_MESSAGES),
             and(
                 where("participants", "array-contains-any", [userId]),
                 where("readed", "==", false),
+                where("uid", "!=", uid)
             ),
-            orderBy("timestamp", "desc"))
+            orderBy("timestamp", "desc")
+        )
 
-        let a = 0
-        const unsubscribe = onSnapshot(countNotReadedMessageQuery, (doc) => {
-
+        return onSnapshot(countNotReadedMessageQuery, (doc) => {
+            const userIndex = usersArray.get(userId)
+            
             doc.forEach((message) => {
-                if (message.data().participants.includes(uid)) {
-                    callback(doc.size)
-                }
+                if (userIndex && message.data().participants.includes(uid)) {
+                    userIndex.countNotReadedMessage = doc.size
+                    filteredData(Array.from(usersArray.values()))
+            }
             })
-            callback(doc.size)
-        }, (error) => {
-            setLoading(false)
         })
-
-        return () => unsubscribe()
     }
 
     return { loading, data }

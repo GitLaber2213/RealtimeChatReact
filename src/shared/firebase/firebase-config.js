@@ -1,6 +1,6 @@
 import { getAuth } from 'firebase/auth'
 import firebase from 'firebase/compat/app'
-import { getFirestore } from "firebase/firestore"
+import { getFirestore, writeBatch } from "firebase/firestore"
 
 
 

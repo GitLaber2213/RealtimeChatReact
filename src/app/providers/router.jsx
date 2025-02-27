@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate, Outlet, useParams } from "react-router-dom"
 import { LoginPage, SignUpPage, ChatsPage } from "../../pages"
-import { RouteConstants } from "../../shared/constants/constants"
+import { RouteConstants } from "../../shared"
 import { Loader, useAuth } from "../../shared"
 
 const AuthLoader = () => {

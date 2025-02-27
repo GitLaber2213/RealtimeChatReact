@@ -2,13 +2,13 @@ import { doc, updateDoc } from "firebase/firestore"
 import { useState } from "react"
 import { auth, firestoreDB } from "../../firebase/firebase-config"
 import { updateEmail } from "firebase/auth"
-import { FirebaseConstants } from "../../constants/constants"
+import { FirebaseConstants } from "../../../shared"
 
 
 
 export const useUpdateProfile = () => {
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(undefined)
+    const [loading, setLoading] = useState(false)
+    const [info, setInfo] = useState(undefined)
 
     const handleUpdateProfile = async (userInfo, uid) => {
         try {
@@ -18,13 +18,14 @@ export const useUpdateProfile = () => {
             await updateEmail(auth.currentUser, userInfo.email)
             await updateDoc(userRef, userInfo)
 
-            setError(undefined)
+            setInfo(undefined)
         } catch (error) {
-            setError(error.message)
+            setInfo(error.message)
         } finally {
             setLoading(false)
+            setInfo("success")
         }
     }
 
-    return { loading, error, handleUpdateProfile }
+    return { loading, info, handleUpdateProfile }
 }

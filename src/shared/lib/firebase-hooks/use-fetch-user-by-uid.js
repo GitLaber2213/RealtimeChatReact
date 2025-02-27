@@ -1,7 +1,7 @@
 import { firestoreDB } from "../../firebase/firebase-config"
 import { useEffect, useState } from "react"
 import { doc, onSnapshot } from "firebase/firestore"
-import { FirebaseConstants } from "../../constants/constants"
+import { FirebaseConstants } from "../../../shared"
 
 export const useFetchUserByUid = (uid) => {
     const [loading, setLoading] = useState(false)

@@ -1,6 +1,6 @@
 import React from "react"
 import classes from './form.module.css'
-import { ErrorInfo } from "../../../shared"
+import { Info } from "../../../shared"
 
 
 export const Form = ({ error, title, children, handleSubmit }) => {
@@ -11,7 +11,7 @@ export const Form = ({ error, title, children, handleSubmit }) => {
                 <div className={classes.title}>{title}</div>
                 <form onSubmit={handleSubmit}>
                     {children}
-                    {error !== undefined && <ErrorInfo errorText={error} />}
+                    {error !== undefined && <Info text={error} />}
                 </form>
             </div>
         </div>

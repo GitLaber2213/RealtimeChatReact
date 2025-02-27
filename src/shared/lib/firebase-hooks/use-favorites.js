@@ -1,5 +1,5 @@
 import { doc, updateDoc, arrayUnion, setDoc, arrayRemove, getDoc } from "firebase/firestore"
-import { FirebaseConstants } from "../../constants/constants"
+import { FirebaseConstants } from "../../../shared"
 import { useAuth } from "./use-auth"
 import { firestoreDB } from "../../firebase/firebase-config"
 import { useEffect, useState } from "react"

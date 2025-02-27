@@ -4,15 +4,18 @@ import MenuItem from "./menu-item"
 
 import starPhoto from '../../../../shared/assets/star.png'
 import deletePhoto from '../../../../shared/assets/delete.png'
-import { useFavorites } from "../../../../shared"
+import { useFavorites, useMessages } from "../../../../shared"
 import { useParams } from "react-router-dom"
 
 
 export const MenuList = () => {
     const { id } = useParams()
     const { loading, addFavorite, deleteFavorite, isFavorite } = useFavorites(id)
+    const { deleteChat } = useMessages()
+
 
     const handleDeleteMessages = () => {
+        if(!loading) deleteChat()
     }
 
     const handleAddFavorite = async () => {

@@ -1,5 +1,5 @@
-import { addDoc, arrayUnion, collection, doc, getDoc, onSnapshot, orderBy, Timestamp, updateDoc, where } from "firebase/firestore"
-import { FirebaseConstants } from "../../constants/constants"
+import { addDoc, arrayUnion, collection, doc, getDoc, onSnapshot, orderBy, Timestamp, updateDoc, where, writeBatch } from "firebase/firestore"
+import { FirebaseConstants } from "../../../shared"
 import { firestoreDB } from "../../firebase/firebase-config"
 import { useAuth } from "./use-auth"
 import { query } from "firebase/database"
@@ -15,7 +15,7 @@ export const useMessages = () => {
     const [messages, setMessages] = useState([])
     const [loadingSendMessage, setLoadingSendMessage] = useState(false)
 
-    
+
     useEffect(() => {
         const messagesQuery = query(
             collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_MESSAGES),
@@ -26,18 +26,16 @@ export const useMessages = () => {
             const messageArray = []
             doc.forEach((message) => {
                 if (message.data().participants.includes(id)) {
-                    messageArray.push({ messageId: message.id, ...message.data() })
+                    messageArray.push({ messageId: message.id, messageRef: message.ref, ...message.data() })
                 }
             })
 
-            if (JSON.stringify(messageArray) !== JSON.stringify(messages)) {
-                setMessages(messageArray)
-            }
+            setMessages(messageArray)
         })
         return () => {
             unsubscribe()
         }
-    }, [id])
+    }, [id, uid])
 
 
     const sendMessage = async (message) => {
@@ -74,5 +72,24 @@ export const useMessages = () => {
         }
     }
 
-    return { sendMessage, readingMessage, messages, loadingSendMessage }
+    const deleteChat = async () => {
+        try {
+            setLoadingSendMessage(true)
+            const batch = writeBatch(firestoreDB)
+
+            messages.forEach((message) => {
+                if (message.participants.includes(id)) {
+                    batch.delete(message.messageRef)
+                }
+            })
+
+            await batch.commit()
+        } catch (error) {
+            // console.log(error)
+        } finally {
+            setLoadingSendMessage(false)
+        }
+    }
+
+    return { sendMessage, readingMessage, deleteChat, messages, loadingSendMessage }
 }
