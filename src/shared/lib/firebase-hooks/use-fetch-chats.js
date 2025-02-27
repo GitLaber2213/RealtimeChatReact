@@ -18,7 +18,7 @@ export const useFetchChats = (searchInputValue) => {
     useEffect(() => {
         setLoading(true)
 
-        const usersArray = new Map() 
+        const usersArray = new Map()
 
         const usersQuery = query(collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_USERS), where("uid", "!=", uid))
 
@@ -62,8 +62,8 @@ export const useFetchChats = (searchInputValue) => {
         )
 
         return onSnapshot(lastMessageQuery, (doc) => {
+            const userIndex = usersArray.get(userId)
             doc.forEach((message) => {
-                const userIndex = usersArray.get(userId)
                 if (userIndex && message.data().participants.includes(uid)) {
                     userIndex.lastMessage = { messageId: message.id, ...message.data() }
                     filteredData(Array.from(usersArray.values()))
@@ -83,7 +83,7 @@ export const useFetchChats = (searchInputValue) => {
             doc.forEach((favorite) => {
                 const isFavorite = favorite.data().favorites.some(favoriteUser => favoriteUser.userId === userId)
                 const userIndex = usersArray.get(userId)
-                if (userIndex && favorite.data().favorites.includes(uid)) {
+                if (userIndex) {
                     userIndex.favorite = isFavorite
                     filteredData(Array.from(usersArray.values()))
                 }
@@ -103,14 +103,15 @@ export const useFetchChats = (searchInputValue) => {
         )
 
         return onSnapshot(countNotReadedMessageQuery, (doc) => {
+            let count = 0
             const userIndex = usersArray.get(userId)
-            
             doc.forEach((message) => {
                 if (userIndex && message.data().participants.includes(uid)) {
-                    userIndex.countNotReadedMessage = doc.size
-                    filteredData(Array.from(usersArray.values()))
-            }
+                    count++
+                }
             })
+            userIndex.countNotReadedMessage = count
+            filteredData(Array.from(usersArray.values()))
         })
     }
 
