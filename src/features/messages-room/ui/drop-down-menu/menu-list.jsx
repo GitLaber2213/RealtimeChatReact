@@ -11,8 +11,8 @@ export const MenuList = () => {
     const { deleteChat } = useMessages()
 
 
-    const handleDeleteMessages = () => {
-        if(!loading) deleteChat()
+    const handleDeleteMessages = async () => {
+        if(!loading) await deleteChat()
     }
 
     const handleAddFavorite = async () => {

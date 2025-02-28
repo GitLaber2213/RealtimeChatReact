@@ -8,3 +8,11 @@
 .menuItem:hover {
     background-color: rgb(97, 129, 107);
 }
+
+.menuItem:hover:first-child {
+    border-radius: 10px 10px 0 0; 
+}
+
+.menuItem:hover:last-child {
+    border-radius: 0 0 10px 10px; 
+}

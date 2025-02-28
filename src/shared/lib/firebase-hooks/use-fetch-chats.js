@@ -78,7 +78,6 @@ export const useFetchChats = (searchInputValue) => {
             where("uid", "==", uid),
             limit(1)
         )
-
         return onSnapshot(favoritesQuery, (doc) => {
             doc.forEach((favorite) => {
                 const isFavorite = favorite.data().favorites.some(favoriteUser => favoriteUser.userId === userId)
