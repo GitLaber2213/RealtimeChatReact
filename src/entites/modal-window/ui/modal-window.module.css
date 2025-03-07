@@ -22,7 +22,7 @@
 }
 
 .modalWindowUnContainer {
-    max-height: 1000px;
+    max-height: 700px;
     max-width: 1000px;
     width: 300px;
     background-color: rgb(39, 59, 44);
@@ -30,7 +30,8 @@
     opacity: 0.1;
     padding: 10px;
     transition: .3s ease-in-out;
-    pointer-events: none;
+    pointer-events: auto;
+    box-sizing: border-box;
     border-radius: 5px;
 }
 
@@ -42,6 +43,7 @@
 .windowHeadContainer {
     font-size: 24px;
     display: flex;
+    background-color: rgb(39, 59, 44);
     padding: 10px;
 }
 
@@ -80,4 +82,11 @@
 
 .closeWindowBtn:hover {
     background-color: rgb(0, 255, 21);
+}
+
+.childrenBlock {
+    max-height: 500px;
+    padding-left: 15px;
+    overflow-y: scroll; 
+    overflow-x: hidden;
 }

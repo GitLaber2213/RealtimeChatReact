@@ -1,6 +1,6 @@
 import Avatar from "react-avatar-edit"
 import React from "react"
-import classes from './profile.module.css'
+import classes from './avatar-loader.module.css'
 
 
 const colorStyle = {
@@ -21,14 +21,14 @@ const labelStyle = {
     cursor: 'pointer'
 }
 
-export const ProfileAvatar = ({ userInfo, handleImageClick, setUserInfo, editAvatar }) => {
+export const AvatarLoader = ({ handleImageClick, setImage, editAvatar }) => {
     return (
         <div className={editAvatar ? classes.changeAvatar + ' ' + classes.active : classes.changeAvatar}>
 
             <Avatar
-                width={295}
+                width={248}
                 height={280}
-                onCrop={(view) => setUserInfo({ ...userInfo, avatar: view })}
+                onCrop={(view) => setImage(view)}
                 onClose={() => handleImageClick(false)}
 
                 borderStyle={{
@@ -54,4 +54,4 @@ export const ProfileAvatar = ({ userInfo, handleImageClick, setUserInfo, editAva
 }
 
 
-export default ProfileAvatar
+export default AvatarLoader

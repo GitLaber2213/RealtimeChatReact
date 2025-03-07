@@ -5,6 +5,6 @@
     width: 5px;
     height: 100%;
     cursor: ew-resize;
-    z-index: 0;
+    z-index: 1000;
     direction: right;
 }

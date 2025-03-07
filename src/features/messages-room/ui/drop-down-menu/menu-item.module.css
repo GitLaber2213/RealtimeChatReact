@@ -16,3 +16,7 @@
 .menuItem:hover:last-child {
     border-radius: 0 0 10px 10px; 
 }
+
+.menuItem:hover:only-child {
+    border-radius: 10px;
+}

@@ -15,10 +15,11 @@ export const UsersAndGroupsContentList = ({ minWidth }) => {
     return (
         <div>
             {data.map((user) => <UsersAndGroupsContentListItem
-                key={user.uid}
+                key={user.id}
                 avatar={user.avatar}
                 userName={user.displayName}
                 userId={user.uid}
+                type={user.type}
                 favorite={user.favorite}
                 lastMessage={user.lastMessage}
                 countNotReadedMessage={user.countNotReadedMessage} 

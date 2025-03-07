@@ -3,7 +3,6 @@ import DeleteIcon from './assets/delete.png'
 import DropDownMenuIcon from './assets/dropDownMenu.png'
 import EmailIcon from './assets/email.png'
 import GroupIcon from './assets/group.png'
-import GroupInChatIcon from './assets/groupInChat.png'
 import LogoutIcon from './assets/logout.png'
 import MenuBarIcon from './assets/menuBar.png'
 import PhoneIcon from './assets/phone.png'
@@ -22,7 +21,6 @@ export {
     DropDownMenuIcon,
     EmailIcon,
     GroupIcon,
-    GroupInChatIcon,
     LogoutIcon,
     MenuBarIcon,
     PhoneIcon,
@@ -45,19 +43,20 @@ export { ResizableElement } from './ui/resizable-element/resizable-element'
 export { Button } from './ui/button/button'
 export { ScrollBar } from './ui/scroll-bar/scroll-bar'
 export { Loader } from './ui/loader/loader'
-export { Info } from './ui/error-info/info'
 
 //LIB//
 export { useObserver } from './lib/hooks/use-observer'
+export { useFormatNumber } from './lib/hooks/use-format-number'
 export { useAuth } from './lib/firebase-hooks/use-auth'
 export { useFetchChats } from './lib/firebase-hooks/use-fetch-chats'
 export { useFetchUserByUid } from './lib/firebase-hooks/use-fetch-user-by-uid'
 export { useFavorites } from './lib/firebase-hooks/use-favorites'
 export { useUpdateProfile } from './lib/firebase-hooks/use-update-profile'
 export { useMessages } from './lib/firebase-hooks/use-messages'
+export { useCreateGroup } from './lib/firebase-hooks/use-create-group'
 
 //CONSTANTS//
-export { SuccessConstants, FirebaseConstants, RouteConstants } from './constants/constants'
+export { SuccessConstants, FirebaseConstants, RouteConstants, SuccessConstantsKey } from './constants/constants'
 
 //CONTEXTS//
 export { AuthContext } from './contexts/auth-context'

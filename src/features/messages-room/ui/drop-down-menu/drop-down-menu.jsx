@@ -4,11 +4,11 @@ import MenuList from "./menu-list"
 
 
 
-const DropDownMenu = ({ isActive, setIsActive }) => {
+const DropDownMenu = ({ isActive, setIsActive, isAdmin }) => {
     return (
         <div className={isActive ? classes.menuContainer + ` ` + classes.active : classes.menuContainer} onClick={() => setIsActive(false)}>
             <div className={isActive ? classes.menu + ' ' + classes.active : classes.menu } onClick={e => e.stopPropagation()}>
-                <MenuList/>
+                <MenuList groupChatEdit={isAdmin}/>
             </div>
         </div>
     )

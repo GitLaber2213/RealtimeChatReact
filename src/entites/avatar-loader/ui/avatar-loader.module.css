@@ -1,0 +1,11 @@
+.changeAvatar {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+}
+
+.changeAvatar.active {
+    width: 300px;
+    height: 300px;
+}

@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux"
 import { usersAndGroupsSlice } from "../../model/users-and-groups.slice"
 
 
-export const UsersAndGroupsContentListItem = ({ userName, userId, avatar, favorite, lastMessage, countNotReadedMessage, minWidth }) => {
+export const UsersAndGroupsContentListItem = ({ userName, userId, avatar, favorite, lastMessage, countNotReadedMessage, minWidth, type }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -25,6 +25,7 @@ export const UsersAndGroupsContentListItem = ({ userName, userId, avatar, favori
                 userName={userName}
                 activeChat={userId === id}
                 favorite={favorite}
+                type={type}
                 lastMessage={lastMessage}
                 countNotReadedMessage={countNotReadedMessage}
                 minWidth={minWidth} />

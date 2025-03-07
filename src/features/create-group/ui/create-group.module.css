@@ -5,9 +5,5 @@
 
 .createGroupItem {
     margin: 10px 0 10px 0;
-}
-
-.usersList {
-    background-color: rgb(29, 44, 33);
-    border-radius: 10px;
+    position: relative;
 }

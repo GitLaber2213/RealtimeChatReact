@@ -5,22 +5,22 @@ import { DeleteIcon, FavoriteIcon, useFavorites, useMessages } from "../../../..
 import { useParams } from "react-router-dom"
 
 
-export const MenuList = () => {
+export const MenuList = ({ groupChatEdit }) => {
     const { id } = useParams()
     const { loading, addFavorite, deleteFavorite, isFavorite } = useFavorites(id)
     const { deleteChat } = useMessages()
 
 
     const handleDeleteMessages = async () => {
-        if(!loading) await deleteChat()
+        if (!loading) await deleteChat()
     }
 
     const handleAddFavorite = async () => {
-        if(!loading) await addFavorite(id) 
+        if (!loading) await addFavorite(id)
     }
 
     const handleDeleteFavorite = async () => {
-        if(!loading) await deleteFavorite(id)
+        if (!loading) await deleteFavorite(id)
     }
 
     return (
@@ -32,12 +32,14 @@ export const MenuList = () => {
                 imgHeight={25}
                 imgWidth={25}
                 loading={loading} />
-                
-            <MenuItem handleClick={handleDeleteMessages}
-                image={DeleteIcon}
-                text={"Delete chat"}
-                imgHeight={25}
-                imgWidth={25} />
+
+            {groupChatEdit &&
+                <MenuItem handleClick={handleDeleteMessages}
+                    image={DeleteIcon}
+                    text={"Delete chat"}
+                    imgHeight={25}
+                    imgWidth={25} />
+            }
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { useFetchUserByUid } from "../../../shared"
+import { useFetchUserByUid, useUpdateProfile } from "../../../shared"
 import { useEffect, useState } from "react"
 
 
@@ -8,6 +8,7 @@ import { useEffect, useState } from "react"
 export const useProfileHandler = (uid) => {
     const { id } = useParams()
     const { loading, data } = useFetchUserByUid(uid !== null ? uid : id)
+    const { info, loading: loadingUpdateProfile, handleUpdateProfile } = useUpdateProfile()
 
     const [editAvatar, setEditAvatar] = useState(false)
 
@@ -29,7 +30,7 @@ export const useProfileHandler = (uid) => {
         }
     }, [data])
 
-    const handleChangeInput = (key) => (value) => {
+    const handleChangeUserInfo = (key) => (value) => {
         setUserInfo(prev => ({ ...prev, [key]: value }))
     }
 
@@ -39,7 +40,12 @@ export const useProfileHandler = (uid) => {
         }
     }
 
-    return { loading, data, userInfo, setUserInfo, setEditAvatar, handleChangeInput, handleImageClick, editAvatar }
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+        await handleUpdateProfile(userInfo, uid)
+    }
+
+    return { loading, loadingUpdateProfile, data, userInfo, setUserInfo, setEditAvatar, handleChangeUserInfo, handleImageClick, handleSubmit, info, editAvatar }
 }
 
 export default useProfileHandler

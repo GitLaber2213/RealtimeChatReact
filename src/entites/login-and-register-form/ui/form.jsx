@@ -1,6 +1,6 @@
 import React from "react"
 import classes from './form.module.css'
-import { Info } from "../../../shared"
+import { Info } from "../../info/ui/info"
 
 
 export const Form = ({ error, title, children, handleSubmit }) => {

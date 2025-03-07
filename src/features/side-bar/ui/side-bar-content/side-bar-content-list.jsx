@@ -32,7 +32,7 @@ export const SideBarContentList = () => {
             </ModalWindow>
 
             <ModalWindow isActive={isActiveCreateGroup} setIsActive={setIsActiveCreateGroup} windowHeader={"Create group"}>
-                {isActiveCreateGroup && <CreateGroup setIsActive={setIsActiveCreateGroup} />}
+                {isActiveCreateGroup && <CreateGroup groupAdminId={uid} setIsActive={setIsActiveCreateGroup} />}
             </ModalWindow>
         </>
     )

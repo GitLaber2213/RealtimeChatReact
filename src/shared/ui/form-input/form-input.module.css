@@ -1,5 +1,8 @@
 .loginUnContainer {
     display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .loginUnContainer div {
@@ -16,6 +19,7 @@
 
 .loginUnContainer input {
     width: 100%;
+    height: 30px;
     background-color: transparent;
     
     margin-left: 10px;

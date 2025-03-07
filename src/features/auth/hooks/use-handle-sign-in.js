@@ -29,6 +29,7 @@ export const useHandleSignIn = (authType) => {
                         photoURL: user.user.photoURL,
                         uid: user.user.uid,
                         phone: "",
+                        type: FirebaseConstants.FIREBASE_DOC_TYPE_USER,
                         avatar: null,
                     })
                     break

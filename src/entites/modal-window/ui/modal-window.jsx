@@ -1,12 +1,13 @@
 import React from "react"
-import classes from './ModalWindow.module.css'
+import classes from './modal-window.module.css'
 import { createPortal } from "react-dom"
+import { ScrollBar } from "../../../shared"
 
 export const ModalWindow = ({ isActive, setIsActive, children, windowHeader }) => {
 
     const modalContainerClass = isActive ? `${classes.modalWindowContainer} ${classes.active}` : classes.modalWindowContainer
     const modalContentClass = isActive ? `${classes.modalWindowUnContainer} ${classes.active}` : classes.modalWindowUnContainer
-    
+
     if (!isActive) return null
 
     return createPortal(
@@ -21,7 +22,11 @@ export const ModalWindow = ({ isActive, setIsActive, children, windowHeader }) =
                     </div>
 
                 </div>
-                {children}
+                <ScrollBar>
+                    <div className={classes.childrenBlock}>
+                        {children}
+                    </div>
+                </ScrollBar>
             </div>
         </div>,
         document.body

@@ -1,18 +1,21 @@
 import React from "react"
 import classes from './chat.module.css'
-import { ItemInList, UserIcon } from "../../../shared"
+import { FirebaseConstants, GroupIcon, ItemInList, useFormatNumber, UserIcon } from "../../../shared"
 
 
-export const Chat = ({ avatar, userName, activeChat, favorite, lastMessage, countNotReadedMessage, minWidth }) => {
+export const Chat = ({ avatar, userName, activeChat, favorite, lastMessage, countNotReadedMessage, minWidth, type }) => {
+    const { formatNumber } = useFormatNumber()
 
-    const className = activeChat 
-    ? (!minWidth ? `${classes.notReadedMessagesCount} ${classes.active}` : `${classes.notReadedMessagesCount} ${classes.active} ${classes.minimized}`)
-    : (minWidth ? `${classes.notReadedMessagesCount} ${classes.minimized}` : `${classes.notReadedMessagesCount}`)
+    const className = activeChat
+        ? (!minWidth ? `${classes.notReadedMessagesCount} ${classes.active}` : `${classes.notReadedMessagesCount} ${classes.active} ${classes.minimized}`)
+        : (minWidth ? `${classes.notReadedMessagesCount} ${classes.minimized}` : `${classes.notReadedMessagesCount}`)
+
+    const DefaultAvatar = type === FirebaseConstants.FIREBASE_DOC_TYPE_USER ? UserIcon : GroupIcon
 
     return (
         <div className={classes.container}>
             <div className={classes.lastMessageContainer}>
-                <ItemInList image={!avatar ? UserIcon : avatar} imgHeight={45} imgWidth={45} text={userName} favorite={favorite}>
+                <ItemInList image={!avatar ? DefaultAvatar : avatar} imgHeight={45} imgWidth={45} text={userName} favorite={favorite}>
                     <div className={activeChat ? classes.lastMessage + ' ' + classes.active : classes.lastMessage}>
                         {lastMessage.message} &nbsp;
                     </div>
@@ -25,7 +28,7 @@ export const Chat = ({ avatar, userName, activeChat, favorite, lastMessage, coun
                 <div>
                     {countNotReadedMessage > 0 ?
                         <div className={className}>
-                            {countNotReadedMessage} 
+                            {formatNumber(countNotReadedMessage)}
                         </div>
                         : <div>&nbsp;</div>}
                 </div>

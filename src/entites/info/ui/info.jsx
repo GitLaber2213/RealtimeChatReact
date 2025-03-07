@@ -11,3 +11,5 @@ export const Info = ({ text, error = true }) => {
         </div>
     )
 }
+
+export default Info

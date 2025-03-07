@@ -17,6 +17,7 @@ export const useMessages = () => {
     const [loadingMessages, setLoadingMessages] = useState(false)
 
 
+
     useEffect(() => {
         setLoadingMessages(true)
         const messagesQuery = query(
@@ -42,7 +43,7 @@ export const useMessages = () => {
     }, [id, uid])
 
 
-    const sendMessage = async (message) => {
+    const sendMessage = async (message, displayName) => {
         setLoadingSendMessage(true)
         try {
             const messagesCollection = collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_MESSAGES)
@@ -52,6 +53,7 @@ export const useMessages = () => {
                 timestamp: Timestamp.now(),
                 participants: arrayUnion(id, uid),
                 uid: uid,
+                displayName: displayName,
                 readed: false
             })
         } catch (error) {

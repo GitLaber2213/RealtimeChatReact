@@ -1,14 +1,8 @@
-.loaderContainer {
-    height: 200px;
+.createGroupHeader.active {
+    cursor: pointer;
 }
 
-.profileHeader {
-    font-size: 24px;
-    margin-bottom: 20px;
-    position: relative;
-}
-
-.profileHeader.active::after {
+.createGroupHeader.active::after {
     content: '';
     position: absolute;
     width: 20px;
@@ -20,7 +14,7 @@
     background-position: center;
     left: 6.7%;
     border-radius: 25%;
-    bottom: 0;
+    bottom: 5px;
     background-color: rgb(58, 138, 78);
     border: 5px solid rgb(39, 59, 44);
     opacity: 0;
@@ -28,7 +22,7 @@
     transition: .2s;
 }
 
-.profileHeader.active:hover::after {
+.createGroupHeader.active:hover::after {
     width: 20px;
     height: 20px;
     opacity: 1;

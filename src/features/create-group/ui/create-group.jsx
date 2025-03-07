@@ -1,52 +1,45 @@
-import React, { useState } from "react"
-import { Button, FormInput, GroupIcon, Loader, ScrollBar, useFetchChats } from "../../../shared"
+import React from "react"
+import { SuccessConstants, SuccessConstantsKey } from "../../../shared"
 import classes from './create-group.module.css'
-import { CreateGroupItem } from "./create-group-item"
+import { useCreateGroupHandlers } from "../hooks/use-create-group-handler"
+import { AvatarLoader, OptionalMenu } from "../../../entites"
+import { CreateGroupList } from "./create-group-list"
+import CreateGroupHeader from "./create-group-header"
 
 
-export const CreateGroup = ({ setIsActive }) => {
-    const [name, setName] = useState('')
-    const { loading, data } = useFetchChats('')
-
-    const [selectedUsers, setSelectedUsers] = useState(new Set())
-
-    const handleClick = (item) => {
-        setSelectedUsers(prevSelected => {
-            const newSelected = new Set(prevSelected)
-            if (newSelected.has(item)) {
-                newSelected.delete(item)
-            } else {
-                newSelected.add(item)
-            }
-            return newSelected
-        })
-    }
-
-
-    if (loading) {
-        return (
-            <div className={classes.container}>
-                <Loader />
-            </div>
-        )
-    }
+export const CreateGroup = ({ setIsActive, groupAdminId, displayName, avatar, groupUsers }) => {
+    const { handleChangeInfo, handleClickUser, handleImageClick, handleSubmit,
+        groupInfo, selectedUsers, editAvatar, isEdit, loading, data, info, loadingCreateGroup } = useCreateGroupHandlers(setIsActive, groupAdminId, displayName, avatar, groupUsers)
 
     return (
         <div className={classes.container}>
-            <div className={classes.createGroupItem}>
-                <FormInput placeholder={'Group name'} onChange={setName} value={name} img={GroupIcon} imgHeight={25} imgWidth={25} />
-            </div>
+            <form onSubmit={(event) => handleSubmit(event)}>
 
-            <div className={classes.usersList}>
-                <ScrollBar>
-                    {data.map((user) => <CreateGroupItem key={user.uid} user={user} handleClick={handleClick} selectedUsers={selectedUsers} />)}
-                </ScrollBar>
-            </div>
+                <div className={classes.createGroupItem}>
+                    <CreateGroupHeader handleChangeInfo={handleChangeInfo} isEdit={isEdit} handleImageClick={handleImageClick} groupInfo={groupInfo} />
+                </div>
 
-            <div className={classes.createGroupItem}>
-                <Button text={"Create"} />
-                <Button handleClick={() => setIsActive(false)} text={"Cancel"} />
-            </div>
+                <AvatarLoader handleImageClick={handleImageClick} setImage={handleChangeInfo("groupImage")} editAvatar={editAvatar} />
+
+                <CreateGroupList
+                    data={data}
+                    handleClickUser={handleClickUser}
+                    selectedUsers={selectedUsers}
+                    isEdit={isEdit}
+                    loading={loading}
+                    loadingCreateGroup={loadingCreateGroup} />
+
+
+                {isEdit && <div className={classes.createGroupItem}>
+                    <OptionalMenu
+                        info={info}
+                        successKey={SuccessConstantsKey.SUCCESS}
+                        successMessage={displayName ? SuccessConstants.UPDATE_PROFILE_SUCCESSFULLY : SuccessConstants.CREATE_GROUP_SUCCESSFULLY}
+                        textSubmitBtn={displayName ? "Update" : "Create"}
+                        textCancelBtn={"Cancel"}
+                        handleClickForCancelBtn={() => setIsActive(false)} />
+                </div>}
+            </form>
         </div>
     )
 }

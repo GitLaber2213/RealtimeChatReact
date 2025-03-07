@@ -1,57 +1,75 @@
 import React from 'react'
 import classes from './profile.module.css'
 import { AddImageIcon, EmailIcon, Loader, PhoneIcon, UserIcon } from '../../../shared'
-import { OptionalMenu } from './optional-menu'
 import { useProfileHandler } from '../hooks/use-profile-handler'
-import { ProfileAvatar } from './profile-avatar'
 import ProfileContent from './profile-content'
+import { AvatarLoader, OptionalMenu } from '../../../entites'
+import { SuccessConstants, SuccessConstantsKey } from '../../../shared'
 
 export const Profile = ({ uid = null, setIsActive }) => {
-    const { loading, userInfo, handleChangeInput, setUserInfo, handleImageClick, editAvatar } = useProfileHandler(uid)
+    const { loading, loadingUpdateProfile, userInfo, handleChangeUserInfo, handleImageClick, handleSubmit, info, editAvatar } = useProfileHandler(uid)
+
     const myProfile = uid !== null
 
 
-    if (loading) return <Loader />
+    if (loading || loadingUpdateProfile) {
+        return (
+            <div className={classes.loaderContainer}>
+                <Loader />
+            </div>
+        )
+    }
 
     return (
         <div>
-            <div className={myProfile ? classes.profileHeader + ' ' + classes.active : classes.profileHeader} style={{ "--add-image-icon": `url(${AddImageIcon})` }}>
+            <form onSubmit={(event) => handleSubmit(event)}>
+                <div className={myProfile ? classes.profileHeader + ' ' + classes.active : classes.profileHeader} style={{ "--add-image-icon": `url(${AddImageIcon})` }}>
+                    <ProfileContent
+                        img={!userInfo.avatar ? UserIcon : userInfo.avatar}
+                        imgHeight={50}
+                        imgWidth={50}
+                        placeholder={"Display name"}
+                        required={true}
+                        handleImageClick={() => handleImageClick(!editAvatar)}
+                        onEdit={myProfile}
+                        value={userInfo.displayName}
+                        handleChangeInput={handleChangeUserInfo("displayName")}
+                    />
+                </div>
+
+                <AvatarLoader setImage={handleChangeUserInfo("avatar")} editAvatar={editAvatar} handleImageClick={handleImageClick} />
+
                 <ProfileContent
-                    img={!userInfo.avatar ? UserIcon : userInfo.avatar}
-                    imgHeight={50}
-                    imgWidth={50}
-                    placeholder={"Display name"}
-                    handleImageClick={() => handleImageClick(!editAvatar)}
+                    inputType={"email"}
+                    img={EmailIcon}
+                    imgHeight={25}
+                    imgWidth={25}
+                    placeholder={"Email"}
                     onEdit={myProfile}
-                    value={userInfo.displayName}
-                    handleChangeInput={handleChangeInput("displayName")}
+                    required={true}
+                    value={userInfo.email}
+                    handleChangeInput={handleChangeUserInfo("email")}
                 />
-            </div>
+                <ProfileContent
+                    inputType={"tel"}
+                    img={PhoneIcon}
+                    imgHeight={25}
+                    imgWidth={25}
+                    placeholder={"Phone number"}
+                    onEdit={myProfile}
+                    required={false}
+                    value={userInfo.phone}
+                    handleChangeInput={handleChangeUserInfo("phone")}
+                />
 
-            <ProfileAvatar setUserInfo={setUserInfo} editAvatar={editAvatar} userInfo={userInfo} handleImageClick={handleImageClick} />
-
-            <ProfileContent
-                inputType={"email"}
-                img={EmailIcon}
-                imgHeight={25}
-                imgWidth={25}
-                placeholder={"Email"}
-                onEdit={myProfile}
-                value={userInfo.email}
-                handleChangeInput={handleChangeInput("email")}
-            />
-            <ProfileContent
-                inputType={"tel"}
-                img={PhoneIcon}
-                imgHeight={25}
-                imgWidth={25}
-                placeholder={"Phone number"}
-                onEdit={myProfile}
-                value={userInfo.phone}
-                handleChangeInput={handleChangeInput("phone")}
-            />
-
-            {myProfile && <OptionalMenu setIsActive={setIsActive} userInfo={userInfo} />}
+                {myProfile && <OptionalMenu
+                    info={info}
+                    successKey={SuccessConstantsKey.SUCCESS}
+                    successMessage={SuccessConstants.UPDATE_PROFILE_SUCCESSFULLY}
+                    textCancelBtn={"Cancel"}
+                    textSubmitBtn={"Save"}
+                    handleClickForCancelBtn={() => setIsActive(false)} />}
+            </form>
         </div>
     )
 }

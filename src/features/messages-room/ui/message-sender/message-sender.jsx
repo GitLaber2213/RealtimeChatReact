@@ -1,6 +1,6 @@
 import React from "react"
 import classes from './message-sender.module.css'
-import { useMessageSender } from "../../hooks/useMessageSender"
+import { useMessageSender } from "../../hooks/use-message-sender"
 import { Loader, SendMessageIcon } from "../../../../shared"
 
 export const MessageSender = () => {

@@ -20,7 +20,7 @@ export const Login = () => {
   }
 
   return (
-    <Form error={error} title="Login" handleSubmit={(e) => handleSubmit(e, email, pass)}>
+    <Form error={error} title="Login" handleSubmit={(event) => handleSubmit(event, email, pass)}>
       <div className={classes.inputContainer}>
         <FormInput type="email" placeholder={'Email'} img={EmailIcon} imgHeight={25} imgWidth={25} value={email} onChange={setEmail} />
       </div>
