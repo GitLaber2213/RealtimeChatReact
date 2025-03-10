@@ -1,17 +1,15 @@
 import { getAuth } from 'firebase/auth'
 import firebase from 'firebase/compat/app'
-import { getFirestore, writeBatch } from "firebase/firestore"
-
-
+import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyADYOb9L3f4x5druPD9Z0nsDOXqI0rC5Ss",
-    authDomain: "real-time-shat.firebaseapp.com",
-    projectId: "real-time-shat",
-    storageBucket: "real-time-shat.firebasestorage.app",
-    messagingSenderId: "354073183953",
-    appId: "1:354073183953:web:321fb3c6f0d87e932a67f0",
-    measurementId: "G-C8J5N5JBVX"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
 }
 
 
@@ -19,4 +17,4 @@ const app = firebase.initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const firestoreDB = getFirestore(app)
 
-export {app, auth, firestoreDB }
+export { app, auth, firestoreDB }
