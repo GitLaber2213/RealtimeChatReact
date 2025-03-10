@@ -23,7 +23,7 @@ const ChatInfoBar = () => {
     const isAdmin = data.admin === uid
 
     
-    if (!id) {
+    if (!id ) {
         return (
             <div className={classes.enterChatContainer}>
                 <EnterChat />

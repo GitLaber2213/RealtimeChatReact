@@ -4,7 +4,7 @@ import { useMessageSender } from "../../hooks/use-message-sender"
 import { Loader, SendMessageIcon } from "../../../../shared"
 
 export const MessageSender = () => {
-    const { handleChange, handleSendMessage, handleKeyDown, messageSenderText, loadingSendMessage } = useMessageSender()
+    const { handleChange, handleSendMessage, handleKeyDown, messageSenderText, loadingSendMessage, loading, groupDataLoading } = useMessageSender()
 
     const checkFilledTextArea = messageSenderText ? classes.senderMessageImg + ' ' + classes.active : classes.senderMessageImg
 
@@ -12,7 +12,7 @@ export const MessageSender = () => {
         <div className={classes.container}>
             <div className={classes.unContainer}>
                 <textarea type="text" onKeyDown={handleKeyDown} onChange={handleChange} value={messageSenderText} placeholder="Write a message..." />
-                {loadingSendMessage ? <Loader /> : <img className={checkFilledTextArea} src={SendMessageIcon} onClick={handleSendMessage} height={30} width={30} />}
+                {loadingSendMessage || loading || groupDataLoading ? <Loader /> : <img className={checkFilledTextArea} src={SendMessageIcon} onClick={handleSendMessage} height={30} width={30} />}
             </div>
         </div>
     )

@@ -1,5 +1,5 @@
 import { addDoc, arrayUnion, collection, doc, getDoc, onSnapshot, orderBy, Timestamp, updateDoc, where, writeBatch } from "firebase/firestore"
-import { FirebaseConstants } from "../../../shared"
+import { FirebaseConstants, useFetchUserByUid } from "../../../shared"
 import { firestoreDB } from "../../firebase/firebase-config"
 import { useAuth } from "./use-auth"
 import { query } from "firebase/database"
@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom"
 export const useMessages = () => {
     const { uid } = useAuth()
     const { id } = useParams()
-
+    const { data, loading } = useFetchUserByUid(id)
     const [messages, setMessages] = useState([])
     const [loadingSendMessage, setLoadingSendMessage] = useState(false)
     const [loadingMessages, setLoadingMessages] = useState(false)
@@ -19,17 +19,31 @@ export const useMessages = () => {
 
 
     useEffect(() => {
+        if(!id) return
         setLoadingMessages(true)
         const messagesQuery = query(
             collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_MESSAGES),
-            where("participants", "array-contains-any", [uid]),
+            where("participants", "array-contains-any", [id]),
             orderBy("timestamp", "desc"))
 
         const unsubscribe = onSnapshot(messagesQuery, (doc) => {
             const messageArray = []
             doc.forEach((message) => {
-                if (message.data().participants.includes(id)) {
-                    messageArray.push({ messageId: message.id, myMessage: message.data().uid !== id, messageRef: message.ref, ...message.data() })
+
+                if (data.type === FirebaseConstants.FIREBASE_DOC_TYPE_USER && message.data().participants.includes(uid)) {
+                    messageArray.push({
+                        messageId: message.id,
+                        myMessage: message.data().uid === uid,
+                        messageRef: message.ref,
+                        ...message.data()
+                    })
+                } else if (data.type === FirebaseConstants.FIREBASE_DOC_TYPE_GROUP) {
+                    messageArray.push({
+                        messageId: message.id,
+                        myMessage: message.data().uid === uid,
+                        messageRef: message.ref,
+                        ...message.data()
+                    })
                 }
             })
 
@@ -40,10 +54,11 @@ export const useMessages = () => {
         return () => {
             unsubscribe()
         }
-    }, [id, uid])
+    }, [id, uid, data])
 
 
-    const sendMessage = async (message, displayName) => {
+    const sendMessage = async (message, displayName, usersInGroup = []) => {
+
         setLoadingSendMessage(true)
         try {
             const messagesCollection = collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_MESSAGES)
@@ -51,26 +66,26 @@ export const useMessages = () => {
             await addDoc(messagesCollection, {
                 message: message,
                 timestamp: Timestamp.now(),
-                participants: arrayUnion(id, uid),
+                participants: usersInGroup.length > 0 ? arrayUnion(id) : arrayUnion(id, uid),
                 uid: uid,
                 displayName: displayName,
-                readed: false
+                readed: arrayUnion()
             })
         } catch (error) {
-            //console.log(error)
+            // console.log(error)
         } finally {
             setLoadingSendMessage(false)
         }
     }
 
 
-    const readingMessage = async (readStatus, messageId) => {
+    const readingMessage = async (messageId) => {
         try {
             const docRef = doc(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_MESSAGES, messageId)
             const docSnap = await getDoc(docRef)
-            if (docSnap.exists() && uid !== docSnap.data().uid && !docSnap.data().readed) {
+            if (docSnap.exists() && uid !== docSnap.data().uid) {
                 updateDoc(docRef, {
-                    readed: readStatus
+                    readed: arrayUnion(uid)
                 })
             }
         } catch (error) {
@@ -97,7 +112,7 @@ export const useMessages = () => {
         }
     }
 
-    return { sendMessage, readingMessage, deleteChat, messages, loadingSendMessage, loadingMessages, id }
+    return { sendMessage, readingMessage, deleteChat, messages, loadingSendMessage, loadingMessages, id, loading }
 }
 
 export default useMessages

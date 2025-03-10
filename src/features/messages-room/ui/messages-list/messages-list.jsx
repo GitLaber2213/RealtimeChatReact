@@ -4,10 +4,9 @@ import Message from "./message"
 import { useParams } from "react-router-dom"
 
 export const MessagesList = () => {
-    const { id } = useParams()
-    const { messages, loadingMessages } = useMessages()
+    const { messages, loadingMessages, loading } = useMessages()
 
-    if (loadingMessages && id) return <Loader />
+    if (loadingMessages || loading) return <Loader />
 
     return (
         <ScrollBar shouldScroll={true}>

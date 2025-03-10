@@ -5,10 +5,13 @@ import { useObserver } from "../../../../shared"
 
 const Message = ({ message, messageId, timeStamp, myMessage, readed, displayName }) => {
     const messageRef = useRef()
+    const getReadedMessage = readed.length > 0
 
-    useObserver(messageRef, messageId, readed)
+    console.log(getReadedMessage)
 
-    const readedMessageStyle = readed ? classes.readItem + ' ' + classes.active : classes.readItem
+    useObserver(messageRef, messageId, getReadedMessage)
+
+    const readedMessageStyle = getReadedMessage ? classes.readItem + ' ' + classes.active : classes.readItem
 
     return (
         <div className={classes.messageContainer} ref={messageRef}>

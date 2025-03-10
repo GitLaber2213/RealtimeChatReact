@@ -16,7 +16,6 @@ export const useFetchChats = (searchInputValue, onlyUsers = false, isEditGroup =
     const [data, setData] = useState([])
 
     useEffect(() => {
-        setLoading(true)
 
         const usersArray = new Map()
         let usersQuery
@@ -52,9 +51,7 @@ export const useFetchChats = (searchInputValue, onlyUsers = false, isEditGroup =
 
             filteredData(Array.from(usersArray.values()))
 
-            setLoading(false)
         }, (error) => {
-            setLoading(false)
         })
 
         return () => unsubscribeUsers()
@@ -62,6 +59,7 @@ export const useFetchChats = (searchInputValue, onlyUsers = false, isEditGroup =
     }, [debounceSearchValue, uid])
 
     const filteredData = (array) => {
+        setLoading(true)
         const filteredUsers = array.filter(user => {
             const matchesSearch = ["displayName"].some(key =>
                 user[key]?.toLowerCase().includes(debounceSearchValue?.toLowerCase())
@@ -79,70 +77,76 @@ export const useFetchChats = (searchInputValue, onlyUsers = false, isEditGroup =
         })
 
         setData(filteredUsers)
+        setLoading(false)
     }
 
     const getLastMessage = (userId, usersArray) => {
-            const lastMessageQuery = query(
-                collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_MESSAGES),
-                where("participants", "array-contains-any", [userId]),
-                orderBy("timestamp", "desc"),
-                limit(1)
-            )
+        const lastMessageQuery = query(
+            collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_MESSAGES),
+            where("participants", "array-contains-any", [userId]),
+            orderBy("timestamp", "desc"),
+            limit(1)
+        )
 
-            return onSnapshot(lastMessageQuery, (doc) => {
-                const userIndex = usersArray.get(userId)
-                doc.forEach((message) => {
-                    if (userIndex && message.data().participants.includes(uid)) {
-                        userIndex.lastMessage = { messageId: message.id, ...message.data() }
-                        filteredData(Array.from(usersArray.values()))
-                    }
-                })
+        return onSnapshot(lastMessageQuery, (doc) => {
+            const userIndex = usersArray.get(userId)
+            doc.forEach((message) => {
+                if(userIndex && userIndex.type === FirebaseConstants.FIREBASE_DOC_TYPE_GROUP && !message.data().readed.includes(userIndex.id)) {
+                    userIndex.lastMessage = { messageId: message.id, ...message.data() }
+                }
+                else if (userIndex && userIndex.type === FirebaseConstants.FIREBASE_DOC_TYPE_USER && message.data().participants.includes(uid)) {
+                    userIndex.lastMessage = { messageId: message.id, ...message.data() }
+                }
             })
-        }
-
-        const getFavoriteStatus = (userId, usersArray) => {
-            const favoritesQuery = query(
-                collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_FAVORITES),
-                where("uid", "==", uid),
-                limit(1)
-            )
-            return onSnapshot(favoritesQuery, (doc) => {
-                doc.forEach((favorite) => {
-                    const isFavorite = favorite.data().favorites.some(favoriteUser => favoriteUser.userId === userId)
-                    const userIndex = usersArray.get(userId)
-                    if (userIndex) {
-                        userIndex.favorite = isFavorite
-                        filteredData(Array.from(usersArray.values()))
-                    }
-                })
-            })
-        }
-
-        const getCountNotReadedMessages = (userId, usersArray) => {
-            const countNotReadedMessageQuery = query(
-                collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_MESSAGES),
-                and(
-                    where("participants", "array-contains-any", [userId]),
-                    where("readed", "==", false),
-                    where("uid", "!=", uid)
-                ),
-                orderBy("timestamp", "desc")
-            )
-
-            return onSnapshot(countNotReadedMessageQuery, (doc) => {
-                let count = 0
-                const userIndex = usersArray.get(userId)
-                doc.forEach((message) => {
-                    if (userIndex && message.data().participants.includes(uid)) {
-                        count++
-                    }
-                })
-                userIndex.countNotReadedMessage = count
-                filteredData(Array.from(usersArray.values()))
-            })
-        }
-
-        return { loading, data }
+            filteredData(Array.from(usersArray.values()))
+        })
     }
 
-    export default useFetchChats
+    const getFavoriteStatus = (userId, usersArray) => {
+        const favoritesQuery = query(
+            collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_FAVORITES),
+            where("uid", "==", uid),
+            limit(1)
+        )
+        return onSnapshot(favoritesQuery, (doc) => {
+            doc.forEach((favorite) => {
+                const isFavorite = favorite.data().favorites.some(favoriteUser => favoriteUser.userId === userId)
+                const userIndex = usersArray.get(userId)
+                if (userIndex) {
+                    userIndex.favorite = isFavorite
+                    filteredData(Array.from(usersArray.values()))
+                }
+            })
+        })
+    }
+
+    const getCountNotReadedMessages = (userId, usersArray) => {
+        const countNotReadedMessageQuery = query(
+            collection(firestoreDB, FirebaseConstants.FIREBASE_COLLECTION_MESSAGES),
+            and(
+                where("participants", "array-contains-any", [userId]),
+                where("uid", "!=", uid)
+            ),
+            orderBy("timestamp", "desc")
+        )
+
+        return onSnapshot(countNotReadedMessageQuery, (doc) => {
+            let count = 0
+            const userIndex = usersArray.get(userId)
+            doc.forEach((message) => {
+                if (userIndex && userIndex.type === FirebaseConstants.FIREBASE_DOC_TYPE_GROUP && !message.data().readed.includes(uid)) {
+                    count++
+                }
+                else if (userIndex && userIndex.type === FirebaseConstants.FIREBASE_DOC_TYPE_USER && message.data().participants.includes(uid) && !message.data().readed.includes(uid)) {
+                    count++
+                }
+            })
+            userIndex.countNotReadedMessage = count
+            filteredData(Array.from(usersArray.values()))
+        })
+    }
+
+    return { loading, data }
+}
+
+export default useFetchChats
